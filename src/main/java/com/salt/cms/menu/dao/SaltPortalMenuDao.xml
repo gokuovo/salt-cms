@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.salt.cms.menu.dao.SaltPortalMenuDao">
+
+
+<!--    <select id="getMenuName" resultType="com.salt.cms.menu">-->
+<!--        select menu_name-->
+<!--        from salt_portal_menu-->
+<!--    </select>-->
+
+<!--    <select id="selectall" resultType="com.sinosoft.lis.agentmanagement.export.AgyLaDirectorExport">-->
+<!--		SELECT-->
+<!--			a.agent_group,-->
+<!--			IF(ISNULL(da.edor_no),'N','Y') managerIsNull,-->
+<!--			a.branch_manager branch_manager,-->
+<!--			a.branch_manager_name branch_manager_name,-->
+<!--			attr.person_attribute person_attribute,-->
+<!--			(	SELECT code_name FROM ld_code WHERE code_type = 'applicationtype' AND CODE = IF( a.branch_level = '01'&amp;&amp; a.branch_manager !='','17', attr.person_attribute )) personAttributeName,-->
+<!--			a.manager_eff_date managerEffDate,-->
+<!--			LEFT (a.manage_com, 4) manageCom2,-->
+<!--			(select agy_name from ld_com_new where com_code = LEFT (a.manage_com, 4)) manageCom2Name,-->
+<!--			LEFT (a.manage_com, 6) manageCom3,-->
+<!--			(select agy_name from ld_com_new where com_code = LEFT (a.manage_com, 6)) manageCom3Name,-->
+<!--			a.branch_attr,-->
+<!--			a.branch_name,-->
+<!--			a.branch_level,-->
+<!--			(select code_name from ld_code where code_type = 'agybranchlevel' and code = a.branch_level) branchLevelName,-->
+<!--			a.branch_eff_date,-->
+<!--			da.make_date makeDate,-->
+<!--			(SELECT code_name from ld_code where code_type = 'agydirectorauditstate' and code = da.state) state-->
+<!--		FROM agy_la_branch_group a-->
+<!--			LEFT JOIN agy_la_agent_attr attr ON a.branch_manager = attr.agent_code-->
+<!--			LEFT JOIN agy_la_director_audit da ON a.agent_group = da.agent_group and da.state = '01'-->
+<!--	    ${ew.customSqlSegment}-->
+<!--	     order by field(da.state,"01") desc,da.make_date desc,a.branch_attr desc , da.manager_eff_date desc-->
+<!--	</select>-->
+
+<!--    <select id="doExport" resultType="com.sinosoft.lis.agentmanagement.export.AgyLaDirectorExport">-->
+<!--		SELECT-->
+<!--			a.branch_manager branch_manager,-->
+<!--			a.branch_manager_name branch_manager_name,-->
+<!--			attr.person_attribute person_attribute,-->
+<!--			(	SELECT code_name FROM ld_code WHERE code_type = 'applicationtype' AND CODE = IF( a.branch_level = '01'&amp;&amp; a.branch_manager !='','17', attr.person_attribute )) personAttributeName,-->
+<!--			a.manager_eff_date managerEffDate,-->
+<!--			LEFT (a.manage_com, 4) manageCom2,-->
+<!--			(select agy_name from ld_com_new where com_code = LEFT (a.manage_com, 4)) manageCom2Name,-->
+<!--			LEFT (a.manage_com, 6) manageCom3,-->
+<!--			(select agy_name from ld_com_new where com_code = LEFT (a.manage_com, 6)) manageCom3Name,-->
+<!--			a.branch_attr,-->
+<!--			a.branch_name,-->
+<!--			a.branch_level,-->
+<!--			(select code_name from ld_code where code_type = 'agybranchlevel' and code = a.branch_level) branchLevelName,-->
+<!--			a.branch_eff_date,-->
+<!--			da.make_date makeDate,-->
+<!--			(select code_name from ld_code where code_type = 'agydirectorauditstate' and code = da.state) state-->
+<!--		FROM agy_la_branch_group a-->
+<!--			LEFT JOIN agy_la_agent_attr attr ON a.branch_manager = attr.agent_code-->
+<!--			LEFT JOIN agy_la_director_audit da ON a.agent_group = da.agent_group and da.state = '01'-->
+<!--	    ${ew.customSqlSegment}-->
+<!--    order by field(da.state,"01") desc,da.make_date desc,a.branch_attr desc , da.manager_eff_date desc-->
+<!--    </select>-->
+
+<!--    <select id="directorAppoint" resultType="com.sinosoft.lis.agentmanagement.form.AgyLaDirectorForm">-->
+<!--		SELECT-->
+<!--			a.agent_group,-->
+<!--			a.manage_com manageCom,-->
+<!--			(select agy_name from ld_com_new where com_code = manage_com) manageComName,-->
+<!--			a.branch_eff_date,-->
+<!--			a.branch_level,-->
+<!--			a.branch_attr curBranchAttr,-->
+<!--			a.branch_name curBranchName,-->
+<!--			a.branch_manager preBranchManager,-->
+<!--			a.branch_manager_name preBranchManagerName,-->
+<!--			a.branch_manager_phone preBranchManagerPhone,-->
+<!--			a.branch_manager curBranchManager,-->
+<!--			a.branch_manager_name curBranchManagerName,-->
+<!--			(select b.branch_attr from agy_la_branch_group b where b.agent_group = a.up_agent_group) upAgentGroup,-->
+<!--			(select b.branch_name from agy_la_branch_group b where b.agent_group = a.up_agent_group) upAgentGroupName-->
+<!--		FROM agy_la_branch_group a-->
+<!--        where a.agent_group = #{agentGroup}-->
+<!--    </select>-->
+<!--    <select id="Aduit" resultType="com.sinosoft.lis.agentmanagement.form.AgyLaDirectorForm">-->
+<!--		SELECT-->
+<!--			a.agent_group,-->
+<!--			a.manage_com manageCom,-->
+<!--			(select agy_name from ld_com_new where com_code = a.manage_com) manageComName,-->
+<!--			a.branch_eff_date,-->
+<!--			a.branch_level,-->
+<!--			a.branch_attr curBranchAttr,-->
+<!--			a.branch_name curBranchName,-->
+<!--			agent.agent_group,-->
+<!--			(select branch_attr from agy_la_branch_group where agent_group = agent.agent_group) preBranchAttr,-->
+<!--			(select branch_name from agy_la_branch_group where agent_group = agent.agent_group) preBranchName,-->
+<!--			da.edor_no,-->
+<!--			da.pre_branch_manager preBranchManager,-->
+<!--			da.pre_branch_manager_name preBranchManagerName,-->
+<!--			da.pre_branch_manager_phone preBranchManagerPhone,-->
+<!--			da.cur_branch_manager curBranchManager,-->
+<!--			da.cur_branch_manager_name curBranchManagerName,-->
+<!--			da.cur_branch_manager_phone curBranchManagerPhone,-->
+<!--			da.manager_eff_date,-->
+<!--			(select b.branch_attr from agy_la_branch_group b where b.agent_group = a.up_agent_group) upAgentGroup,-->
+<!--			(select b.branch_name from agy_la_branch_group b where b.agent_group = a.up_agent_group) upAgentGroupName-->
+<!--		FROM agy_la_branch_group a-->
+<!--		LEFT JOIN agy_la_director_audit da ON a.agent_group = da.agent_group and da.state = '01'-->
+<!--		LEFT JOIN agy_la_agent agent ON da.cur_branch_manager = agent.agent_code-->
+<!--        where a.agent_group = #{agentGroup}-->
+<!--    </select>-->
+
+
+<!--    <select id="doSelectHistory" resultType="com.sinosoft.lis.agentmanagement.form.AgyLaDirectorForm">-->
+<!--		SELECT-->
+<!--			a.agent_group,-->
+<!--			a.branch_level,-->
+<!--			a.manage_com manageCom,-->
+<!--			(select agy_name from ld_com_new where com_code = a.manage_com) manageComName,-->
+<!--			a.branch_attr curBranchAttr,-->
+<!--			a.branch_name curBranchName,-->
+<!--			da.pre_branch_manager preBranchManager,-->
+<!--			da.pre_branch_manager_name preBranchManagerName,-->
+<!--			da.pre_branch_manager_phone preBranchManagerPhone,-->
+<!--			da.cur_branch_manager curBranchManager,-->
+<!--			da.cur_branch_manager_name curBranchManagerName,-->
+<!--			da.cur_branch_manager_phone curBranchManagerPhone,-->
+<!--			da.manager_eff_date stringManagerEffDate,-->
+<!--			(case when (da.cur_branch_manager !='' or da.cur_branch_manager !=null) then '任命'-->
+<!--				when (da.pre_branch_manager !='' or da.pre_branch_manager !=null) then '免职'-->
+<!--				else ''-->
+<!--			end ) rmType-->
+<!--		FROM agy_la_director_audit da-->
+<!--		LEFT JOIN agy_la_branch_group a  ON a.agent_group = da.agent_group-->
+<!--		LEFT JOIN agy_la_agent agent ON da.cur_branch_manager = agent.agent_code-->
+<!--	    ${ew.customSqlSegment}-->
+<!--	    order by a.manage_com desc,a.branch_attr desc,da.manager_eff_date desc-->
+<!--    </select>-->
+
+
+</mapper>

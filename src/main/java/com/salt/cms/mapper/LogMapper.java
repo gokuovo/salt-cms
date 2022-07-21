@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.salt.cms.common.mybatis.Page;
 import com.salt.cms.model.LogDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
 /**
  * @author pedro@TaleLin
  */
+@Mapper
 @Repository
 public interface LogMapper extends BaseMapper<LogDO> {
 

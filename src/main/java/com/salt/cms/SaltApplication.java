@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author pedro@TaleLin
  */
 @RestController
-@MapperScan(basePackages = {"com.salt.cms.mapper"})
 @SpringBootApplication(scanBasePackages = {"com.salt.cms"})
 public class SaltApplication {
 

@@ -1,6 +1,7 @@
 package com.salt.cms.homepage.controller;
 
 import com.salt.cms.bo.FileBO;
+import com.salt.cms.homepage.form.SaltImagesForm;
 import com.salt.cms.service.FileService;
 import io.github.talelin.core.annotation.LoginRequired;
 import com.salt.cms.homepage.service.SaltHomepageService;
@@ -31,18 +32,10 @@ public class SaltHomepageController {
     }
 
     @GetMapping("/getBackgroundUnder")
-    public String getBackgroundUnder(){
-        log.info("开始获取首页背景底图");
-        return saltHomepageService.getBackgroundUnder();
+    public List<SaltImagesForm> getBackground(){
+        log.info("开始获取背景");
+        return saltHomepageService.getBackground();
     }
-
-    @GetMapping("/getBackgroundUp")
-    public String getBackgroundUp(){
-        log.info("开始获取首页背景顶图");
-        return saltHomepageService.getBackgroundUp();
-    }
-
-
 
     @PostMapping("/logo")
     @LoginRequired

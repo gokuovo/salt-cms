@@ -2,6 +2,7 @@ package com.salt.cms.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.salt.cms.model.GroupDO;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author pedro@TaleLin
  * @author Juzi@TaleLin
  */
+@Mapper
 @Repository
 public interface GroupMapper extends BaseMapper<GroupDO> {
 

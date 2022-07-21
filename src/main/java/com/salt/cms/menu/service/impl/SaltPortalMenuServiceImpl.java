@@ -1,33 +1,29 @@
-package com.salt.cms.homepage.service.impl;
+package com.salt.cms.menu.service.impl;
 
 
-import com.salt.cms.homepage.dao.SaltImagesDao;
-import com.salt.cms.homepage.form.SaltImagesForm;
-import com.salt.cms.homepage.service.SaltHomepageService;
+import com.salt.cms.menu.dao.SaltPortalMenuDao;
+import com.salt.cms.menu.form.SPMenuForm;
+import com.salt.cms.menu.service.SaltPortalMenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
-public class SaltHomepageServiceImpl implements SaltHomepageService {
+public class SaltPortalMenuServiceImpl implements SaltPortalMenuService {
 
-    @Autowired(required=false)
-    private SaltImagesDao saltImagesDao;
+    @Autowired
+    private SaltPortalMenuDao saltPortalMenuDao;
 
-
-    @Override
-    public String getLogo() {
-        return saltImagesDao.getLogo();
-    }
 
     @Override
-    public List<SaltImagesForm> getBackground() {
-        return saltImagesDao.getBackground();
+    public List<SPMenuForm> getMenu() {
+        return saltPortalMenuDao.getMenu();
     }
-
 
 //    @Override
 //    public R addMenu(SPMenuForm spMenuForm) {
@@ -50,7 +46,7 @@ public class SaltHomepageServiceImpl implements SaltHomepageService {
 //            return R.error("请输入数字");
 //        }
 //        SaltPortalMenuEntity saltPortalMenuEntity = new SaltPortalMenuEntity();
-//        saltPortalMenuEntity.setId(ID.id());
+//        saltPortalMenuEntity.setId(UUID.randomUUID().toString());
 //        saltPortalMenuEntity.setMenuNameEn(spMenuForm.getMenuNameEn());
 //        saltPortalMenuEntity.setMenuNameJap(spMenuForm.getMenuNameJap());
 //        saltPortalMenuEntity.setMenuNameSpa(spMenuForm.getMenuNameJap());

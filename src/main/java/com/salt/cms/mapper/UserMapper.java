@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.salt.cms.common.mybatis.Page;
 import com.salt.cms.model.UserDO;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
  * @author colorful@TaleLin
  * @author Juzi@TaleLin
  */
+@Mapper
 @Repository
 public interface UserMapper extends BaseMapper<UserDO> {
 
