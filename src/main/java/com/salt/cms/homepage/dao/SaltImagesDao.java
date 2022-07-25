@@ -15,10 +15,10 @@ public interface SaltImagesDao extends BaseMapper<SaltImagesEntity> {
 
 //    @Select("select menu_name from salt_portal_menu")
 //    List<String> getMenuName();
-    @Select("select image_url from salt_iamges where image_code = '01' ")
+    @Select("select image_url from salt_images where image_code = '01' ")
     String getLogo();
 
-    @Select("select * from salt_iamges")
+    @Select("select * from salt_images")
     List<SaltImagesForm> getBackground();
 
 }
