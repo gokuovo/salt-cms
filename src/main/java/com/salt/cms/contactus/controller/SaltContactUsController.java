@@ -27,17 +27,17 @@ public class SaltContactUsController {
 
     @PostMapping("/addContact")
     public R addMenu(@RequestBody SaltContactForm contactUsForm){
-        return contactUservice.addContact(contactUsForm);
+        return contactUsService.addContact(contactUsForm);
     }
 
     @PostMapping("modifyContact")
     public R modifyContact(@RequestBody SaltContactForm contactUsForm){
-        return contactUservice.modifyContact(contactUsForm);
+        return contactUsService.modifyContact(contactUsForm);
     }
 
     @PostMapping("deleteContact")
     public R deleteContact(@RequestBody String id){
-        return contactUservice.deleteContact(id);
+        return contactUsService.deleteContact(id);
     }
 //    //-------------------------------------------contactus联系方式-------------------------------------------
 //
@@ -46,29 +46,29 @@ public class SaltContactUsController {
 //    //-------------------------------------------联系图标-------------------------------------------
     @GetMapping("getSocialSix")
     public R getSocialSix(){
-        List<SaltSocialEntity> list = contactUservice.getSocialSix();
+        List<SaltSocialEntity> list = contactUsService.getSocialSix();
         return R.ok().put("list",list);
     }
 
     @GetMapping("getSocialFour")
     public R getSocialFour(){
-        List<SaltSocialEntity> list = contactUservice.getSocialFour();
+        List<SaltSocialEntity> list = contactUsService.getSocialFour();
         return R.ok().put("list",list);
     }
 
     @PostMapping("addSocial")
     public R addSocial(@RequestBody SaltSocialForm saltSocialForm){
-        return contactUservice.addSocial(saltSocialForm);
+        return contactUsService.addSocial(saltSocialForm);
     }
 
     @PostMapping("deleteSocial")
     public R deleteSocial(@RequestBody String id){
-        return contactUservice.deleteSocial(id);
+        return contactUsService.deleteSocial(id);
     }
 
     @PostMapping("modifySocial")
     public R modifySocial(@RequestBody SaltSocialForm saltSocialForm){
-        return contactUservice.modifySocial(saltSocialForm);
+        return contactUsService.modifySocial(saltSocialForm);
     }
 //    //-------------------------------------------联系图标-------------------------------------------
 
