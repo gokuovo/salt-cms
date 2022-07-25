@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Slf4j
@@ -20,7 +21,7 @@ public class SaltPartersController {
 
 
     @GetMapping("/getPartners")
-    public List<String> getPartners(){
+    public List<Map<String, Object>> getPartners(){
         log.info("开始获取所有合作商图标信息");
         return partnersService.getPartners();
     }

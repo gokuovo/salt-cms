@@ -16,8 +16,8 @@ public interface SaltPartnersDao extends BaseMapper<SaltPartnerEntity> {
 //    @Select("select * from salt_partner order by sort")
 //    List<SaltPartnersForm> getAllPartners();
 
-    @Select("select partner_url from salt_partner order by sort")
-    List<String> getPartners();
+    @Select("select * from salt_partner order by sort")
+    List<SaltPartnerEntity> getPartners();
     @Select("select * from salt_partner order by sort")
     List<SaltPartnerEntity> selectPartner();
 }
