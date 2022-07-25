@@ -1,6 +1,7 @@
 package com.salt.cms.homepage.controller;
 
 import com.salt.cms.bo.FileBO;
+import com.salt.cms.entity.SaltImagesEntity;
 import com.salt.cms.homepage.form.SaltImagesForm;
 import com.salt.cms.menu.form.SPMenuForm;
 import com.salt.cms.service.FileService;
@@ -38,6 +39,16 @@ public class SaltHomepageController {
     public List<SaltImagesForm> getBackground(){
         log.info("开始获取背景");
         return saltHomepageService.getBackground();
+    }
+
+    /**
+     * 根据imageCode获取不同图片
+     * @param imageCode
+     * @return
+     */
+    @GetMapping("/getImagesByImageCode")
+    public List<SaltImagesEntity> getImagesByImageCode(String imageCode){
+        return saltHomepageService.getImagesByImageCode(imageCode);
     }
 
 

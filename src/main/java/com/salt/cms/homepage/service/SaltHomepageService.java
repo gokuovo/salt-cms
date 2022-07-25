@@ -10,9 +10,16 @@ import java.util.List;
 public interface SaltHomepageService {
 
     String getLogo();
+
     List<SaltImagesForm> getBackground();
+
+    List<SaltImagesEntity> getImagesByImageCode(String imageCode);
+
     R addImage(SaltImagesForm saltImagesForm);
+
     R modifyImage(SaltImagesForm saltImagesForm);
+
     R deleteImage(String id);
+
     List<SaltImagesEntity> listImage();
 }
