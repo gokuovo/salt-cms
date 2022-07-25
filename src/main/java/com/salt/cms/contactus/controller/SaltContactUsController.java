@@ -17,12 +17,12 @@ import java.util.List;
 @RequestMapping("/SaltContactUs")
 public class SaltContactUsController {
     @Autowired
-    private SaltContactUsService contactUservice;
+    private SaltContactUsService contactUsService;
     //-------------------------------------------contactus联系方式-------------------------------------------
     @GetMapping("/getContact")
     public SaltContactForm getContact(){
         log.info("开始获取联系信息");
-        return contactUservice.getContact();
+        return contactUsService.getContact();
     }
 
     @PostMapping("/addContact")

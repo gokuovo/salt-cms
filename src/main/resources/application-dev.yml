@@ -8,10 +8,16 @@ server:
 spring:
   # 数据源配置，请修改为你项目的实际配置
   datasource:
-    username: "root"
-    password: "123456"
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/salt?useSSL=false&serverTimezone=UTC&characterEncoding=UTF8&allowPublicKeyRetrieval=TRUE
+    url: jdbc:mysql://47.96.125.127:3306/salt?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: qwe123
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+#mybatis-plus配置控制台打印完整带参数SQL语句
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
 
