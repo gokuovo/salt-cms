@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @TableName("salt_social")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SaltSocailEntity {
+public class SaltSocialEntity {
     private String id;
     private String connectCode;
     private String imageUrl;
