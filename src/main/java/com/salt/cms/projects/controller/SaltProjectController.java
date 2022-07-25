@@ -6,14 +6,14 @@ import com.salt.cms.entity.SaltListEntity;
 import com.salt.cms.entity.SaltMusicVideoEntity;
 import com.salt.cms.menu.form.SPMenuForm;
 import com.salt.cms.menu.service.SaltPortalMenuService;
+import com.salt.cms.news.form.SaltNewsForm;
+import com.salt.cms.projects.form.SaltListForm;
 import com.salt.cms.projects.form.SaltMusicVideoForm;
 import com.salt.cms.projects.service.SaltProjectService;
+import com.salt.cms.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,18 +43,56 @@ public class SaltProjectController {
         return saltProjectService.getList();
     }
 
-//    @PostMapping("/addMenu")
-//    public R addMenu(@RequestBody SPMenuForm spMenuForm){
-//        return saltPortalMenuService.addMenu(spMenuForm);
-//    }
-//
-//    @PostMapping("modifyMenu")
-//    public R modifyMenu(@RequestBody SPMenuForm spMenuForm){
-//        return saltPortalMenuService.modifyMenu(spMenuForm);
-//    }
-//
-//    @PostMapping("deleteMenu")
-//    public R deleteMenu(@RequestBody String id){
-//        return saltPortalMenuService.deleteMenu(id);
-//    }
+    @GetMapping("/getProjectPage")
+    public R getProjectPage(@PathVariable("album")String album){
+        log.info("开始获取project媒体信息");
+        return R.ok().put("list",saltProjectService.getProject(album));
+    }
+
+    @GetMapping("/getAlbumPage")
+    public R getAlbumPage(){
+        log.info("开始获取专辑信息");
+        return R.ok().put("list",saltProjectService.getAlbum());
+    }
+
+    @GetMapping("/getListPage")
+    public R getListPage(){
+        log.info("开始获取project页面list信息");
+        return R.ok().put("list",saltProjectService.getList());
+    }
+
+
+    @PostMapping("/addFile")
+    public R addFile(@RequestBody SaltMusicVideoForm saltMusicVideoForm){
+        return saltProjectService.addFile(saltMusicVideoForm);
+    }
+
+    @PostMapping("/modifyFile")
+    public R amodifyFile(@RequestBody SaltMusicVideoForm saltMusicVideoForm){
+        return saltProjectService.modifyFile(saltMusicVideoForm);
+    }
+
+    @PostMapping("/deleteFile")
+    public R deleteFile(@RequestBody String id){
+        return saltProjectService.deleteFile(id);
+    }
+
+
+
+    @PostMapping("/addList")
+    public R addList(@RequestBody SaltListForm saltListForm){
+        return saltProjectService.addList(saltListForm);
+    }
+
+    @PostMapping("modifyList")
+    public R modifyList(@RequestBody SaltListForm saltListForm){
+        return saltProjectService.modifyList(saltListForm);
+    }
+
+    @PostMapping("deleteList")
+    public R deleteList(@RequestBody String id){
+        return saltProjectService.deleteList(id);
+    }
+
+
 }

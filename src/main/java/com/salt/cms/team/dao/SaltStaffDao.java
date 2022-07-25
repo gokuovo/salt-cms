@@ -15,6 +15,8 @@ public interface SaltStaffDao extends BaseMapper<SaltStaffEntity> {
 
     @Select("select * from salt_video order by sort ")
     List<SaltTeamForm> getTeam();
+    @Select("select * from salt_video order by sort ")
+    List<SaltStaffEntity> getStaff();
 
 
 }

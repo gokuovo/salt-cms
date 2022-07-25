@@ -62,6 +62,7 @@ public class SaltContactUsServiceImpl implements SaltContactUsService {
         }
         SaltContactEntity saltContactEntity = new SaltContactEntity();
         BeanUtils.copyProperties(contactUsForm,saltContactEntity);
+        saltContactEntity.setId(UUID.randomUUID().toString());
         saltContactUsDao.insert(saltContactEntity);
         return R.ok("添加成功");
     }

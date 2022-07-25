@@ -2,7 +2,9 @@ package com.salt.cms.homepage.controller;
 
 import com.salt.cms.bo.FileBO;
 import com.salt.cms.homepage.form.SaltImagesForm;
+import com.salt.cms.menu.form.SPMenuForm;
 import com.salt.cms.service.FileService;
+import com.salt.cms.utils.R;
 import io.github.talelin.core.annotation.LoginRequired;
 import com.salt.cms.homepage.service.SaltHomepageService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +27,9 @@ public class SaltHomepageController {
     @Autowired
     private FileService fileService;
 
+
     @GetMapping("/getLogo")
-    public String getMenu(){
+    public String getLogo(){
         log.info("开始获取门户工作室图标");
         return saltHomepageService.getLogo();
     }
@@ -37,21 +40,24 @@ public class SaltHomepageController {
         return saltHomepageService.getBackground();
     }
 
-    @PostMapping("/logo")
-    @LoginRequired
-    public List<FileBO> upload(MultipartHttpServletRequest multipartHttpServletRequest) {
-        MultiValueMap<String, MultipartFile> fileMap =
-                multipartHttpServletRequest.getMultiFileMap();
-        return fileService.upload(fileMap);
+
+    @PostMapping("addImage")
+    public R addImage(@RequestBody SaltImagesForm saltImagesForm){
+        return saltHomepageService.addImage(saltImagesForm);
     }
-//
-//    @PostMapping("modifyLogo")
-//    public R modifyMenu(@RequestBody SPMenuForm spMenuForm){
-//        return saltLogoService.modifyLogo(spMenuForm);
-//    }
-//
-//    @PostMapping("deleteLogo")
-//    public R deleteMenu(@RequestBody String id){
-//        return saltLogoService.deleteLogo(id);
-//    }
+
+    @PostMapping("deleteImage")
+    public R deleteImage(@RequestBody String id){
+        return saltHomepageService.deleteImage(id);
+    }
+
+    @PostMapping("modifyImage")
+    public R modifyImage(@RequestBody SaltImagesForm saltImagesForm){
+        return saltHomepageService.modifyImage(saltImagesForm);
+    }
+
+    @PostMapping("listImage")
+    public R listImage(){
+        return R.ok().put("list",saltHomepageService.listImage());
+    }
 }

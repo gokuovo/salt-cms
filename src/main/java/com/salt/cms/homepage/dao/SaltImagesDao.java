@@ -21,4 +21,7 @@ public interface SaltImagesDao extends BaseMapper<SaltImagesEntity> {
     @Select("select * from salt_images")
     List<SaltImagesForm> getBackground();
 
+    @Select("select * from salt_images")
+    List<SaltImagesEntity> listImage();
+
 }

@@ -5,6 +5,8 @@ import com.salt.cms.entity.SaltVideoEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface SaltVideoDao extends BaseMapper<SaltVideoEntity> {
 
@@ -20,5 +22,8 @@ public interface SaltVideoDao extends BaseMapper<SaltVideoEntity> {
 
     @Select("select video_url from salt_video where video_type = '04' ")
     String getGameAudioPipeline();
+
+    @Select("select * from salt_video ")
+    List<SaltVideoEntity> getVideo();
 
 }

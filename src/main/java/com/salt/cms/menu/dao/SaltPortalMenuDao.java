@@ -15,4 +15,7 @@ public interface SaltPortalMenuDao extends BaseMapper<SaltPortalMenuEntity> {
 //    List<String> getMenuName();
     @Select("select * from salt_portal_menu order by sort")
     List<SPMenuForm> getMenu();
+
+    @Select("select * from salt_portal_menu order by sort")
+    List<SaltPortalMenuEntity> listMenu();
 }
