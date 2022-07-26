@@ -16,6 +16,7 @@ import java.util.UUID;
  * @Author nanyi
  * @Date 2020/12/30 11:05
  **/
+@RequestMapping("fileUpload")
 @Controller
 public class FileUploadontroller {
     @GetMapping("/index")
@@ -26,6 +27,7 @@ public class FileUploadontroller {
     /**
      * @Description:单个文件上传
      */
+    @PostMapping("/fileUpload")
     @ResponseBody
     public String upload(MultipartFile file,String imageCode) {
 //        获取原始文件名

@@ -17,5 +17,5 @@ public interface UploadHandler {
     /**
      * 在文件写入本地或者上传到云之后调用此方法
      */
-    void afterHandle(File file);
+    void afterHandle(File file,String imageType);
 }

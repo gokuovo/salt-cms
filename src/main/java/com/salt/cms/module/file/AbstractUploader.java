@@ -21,31 +21,31 @@ public abstract class AbstractUploader implements Uploader {
     private UploadHandler uploadHandler;
 
     @Override
-    public List<File> upload(MultiValueMap<String, MultipartFile> fileMap) {
+    public List<File> upload(MultiValueMap<String, MultipartFile> fileMap,String imageType) {
         checkFileMap(fileMap);
         // 得到单个文件的大小限制
         // 本地存储需先初始化存储文件夹
-        return handleMultipartFiles(fileMap);
+        return handleMultipartFiles(fileMap,imageType);
     }
 
     @Override
-    public List<File> upload(MultiValueMap<String, MultipartFile> fileMap, UploadHandler uploadHandler) {
+    public List<File> upload(MultiValueMap<String, MultipartFile> fileMap,String imageType, UploadHandler uploadHandler) {
         this.uploadHandler = uploadHandler;
-        return this.upload(fileMap);
+        return this.upload(fileMap,imageType);
     }
 
-    protected List<File> handleMultipartFiles(MultiValueMap<String, MultipartFile> fileMap) {
+    protected List<File> handleMultipartFiles(MultiValueMap<String, MultipartFile> fileMap,String imageType) {
         long singleFileLimit = getSingleFileLimit();
         List<File> res = new ArrayList<>();
         fileMap.keySet().forEach(key -> fileMap.get(key).forEach(file -> {
             if (!file.isEmpty()) {
-                handleOneFile0(res, singleFileLimit, file);
+                handleOneFile0(res, singleFileLimit, file,imageType);
             }
         }));
         return res;
     }
 
-    private void handleOneFile0(List<File> res, long singleFileLimit, MultipartFile file) {
+    private void handleOneFile0(List<File> res, long singleFileLimit, MultipartFile file,String imageType) {
         byte[] bytes = getFileBytes(file);
         String[] include = getFileProperties().getInclude();
         String[] exclude = getFileProperties().getExclude();
@@ -72,7 +72,7 @@ public abstract class AbstractUploader implements Uploader {
             res.add(fileData);
             // 上传到本地或云上成功之后，调用afterHandle
             if (uploadHandler != null) {
-                uploadHandler.afterHandle(fileData);
+                uploadHandler.afterHandle(fileData,imageType);
             }
         }
     }

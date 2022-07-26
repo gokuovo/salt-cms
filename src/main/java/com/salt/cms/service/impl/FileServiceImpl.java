@@ -1,26 +1,34 @@
 package com.salt.cms.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.salt.cms.bo.FileBO;
+import com.salt.cms.entity.SaltImagesEntity;
+import com.salt.cms.homepage.dao.SaltImagesDao;
 import com.salt.cms.mapper.FileMapper;
 import com.salt.cms.model.FileDO;
 import com.salt.cms.module.file.*;
 import com.salt.cms.service.FileService;
 import com.salt.cms.module.file.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author pedro@TaleLin
  * @author Juzi@TaleLin
  * @author colorful@TaleLin
  */
+@Slf4j
 @Service
 public class FileServiceImpl extends ServiceImpl<FileMapper, FileDO> implements FileService {
 
@@ -33,6 +41,9 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileDO> implements 
     @Autowired
     private FileProperties fileProperties;
 
+    @Autowired
+    private SaltImagesDao saltImagesDao;
+
     /**
      * 为什么不做批量插入
      * 1. 文件上传的数量一般不多，3个左右
@@ -40,10 +51,10 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileDO> implements 
      * 3. 批量插入也仅仅只是一条sql语句的事情，如果真的需要，可以自行尝试一下
      */
     @Override
-    public List<FileBO> upload(MultiValueMap<String, MultipartFile> fileMap) {
+    public List<FileBO> upload(MultiValueMap<String, MultipartFile> fileMap,String imageType) {
         List<FileBO> res = new ArrayList<>();
 
-        uploader.upload(fileMap, new UploadHandler() {
+        uploader.upload(fileMap,imageType, new UploadHandler() {
             @Override
             public boolean preHandle(File file) {
                 FileDO found = baseMapper.selectByMd5(file.getMd5());
@@ -57,13 +68,30 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileDO> implements 
                 return false;
             }
 
+
             @Override
-            public void afterHandle(File file) {
+            @Transactional
+            public void afterHandle(File file,String imageType) {
                 // 保存到数据库, 修复issue131：https://github.com/TaleLin/lin-cms-spring-boot/issues/131
-                FileDO fileDO = new FileDO();
-                BeanUtils.copyProperties(file, fileDO);
-                getBaseMapper().insert(fileDO);
-                res.add(transformDoToBo(fileDO, file.getKey()));
+                try{
+                    FileDO fileDO = new FileDO();
+                    BeanUtils.copyProperties(file, fileDO);
+                    getBaseMapper().insert(fileDO);
+                    QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
+                    qw.eq("image_code",imageType);
+                    if (!ObjectUtils.isEmpty(saltImagesDao.selectList(qw))){
+                        saltImagesDao.delete(qw);
+                    }
+                    SaltImagesEntity saltImagesEntity = new SaltImagesEntity();
+                    saltImagesEntity.setId(UUID.randomUUID().toString());
+                    saltImagesEntity.setImageCode(imageType);
+                    saltImagesEntity.setImageUrl("localhost:5000/asserts/"+file.getPath());
+                    saltImagesDao.insert(saltImagesEntity);
+                    res.add(transformDoToBo(fileDO, file.getKey()));
+                }catch (Exception e){
+                    log.info("插入图片失败");
+                }
+
             }
         });
         return res;

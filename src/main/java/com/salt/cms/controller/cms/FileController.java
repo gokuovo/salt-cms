@@ -5,12 +5,11 @@ import com.salt.cms.service.FileService;
 import io.github.talelin.core.annotation.LoginRequired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -32,9 +31,9 @@ public class FileController {
      */
     @PostMapping
     @LoginRequired
-    public List<FileBO> upload(MultipartHttpServletRequest multipartHttpServletRequest) {
+    public List<FileBO> upload(MultipartHttpServletRequest multipartHttpServletRequest, @RequestParam("imageType") String imageType) {
         MultiValueMap<String, MultipartFile> fileMap =
                 multipartHttpServletRequest.getMultiFileMap();
-        return fileService.upload(fileMap);
+        return fileService.upload(fileMap,imageType);
     }
 }
