@@ -30,6 +30,7 @@ public class SaltPartnersServiceImpl implements SaltPartnersService {
         if (!list.isEmpty()) {
             for (SaltPartnerEntity partner : list) {
                 Map<String, Object> map = new HashMap<String, Object>();
+                map.put("id", partner.getId());
                 map.put("partnerUrl", partner.getPartnerUrl());
                 map.put("partnerLink", partner.getPartnerLink());
                 listMap.add(map);

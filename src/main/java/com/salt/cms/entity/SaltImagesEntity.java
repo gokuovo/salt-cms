@@ -13,6 +13,7 @@ public class SaltImagesEntity {
 
     private String id;
 
+    //10.contactUs移动背景图 11.contactUs的ourSocial图标
     private String imageCode;
 
     private String imageUrl;
