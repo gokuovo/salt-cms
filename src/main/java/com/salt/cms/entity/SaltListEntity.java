@@ -20,7 +20,7 @@ public class SaltListEntity {
     private String companyEn;
     private String companyChi;
     private String companyJap;
-    private String companyrSpa;
+    private String companySpa;
     private String platformEn;
     private String platformChi;
     private String platformJap;
