@@ -9,19 +9,21 @@ import com.salt.cms.utils.R;
 import java.util.List;
 
 public interface SaltOurServiceService {
-    String getMusic();
-    String getSoundDesign();
-    String getVoiceActing();
-    String getGameAudioPipeline();
-    SaltWordForm getWhatWeDo();
-    SaltWordForm getWhatWeDoText();
-    SaltWordForm getRotation();
+
+    String getVideo(String videoType);
     List<SaltWordEntity> getWord();
+    List<String> getRotation();
+
     R addWord(SaltWordForm saltWordForm);
-    R deleteWord(String id);
+    SaltWordEntity getWordId(String id);
+    void deleteWord(String id);
     R modifyWord(SaltWordForm saltWordForm);
-    List<SaltVideoEntity> getVideo();
+    List<SaltVideoEntity> getVideoList();
     R addVideo(SaltVideoForm saltVideoForm);
     R modifyVideo(SaltVideoForm saltVideoForm);
     R deleteVideo(String id);
+
+
+    List<String> getWordType();
+    SaltWordEntity getWordEntity(String id);
 }

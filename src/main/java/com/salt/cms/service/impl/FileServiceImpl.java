@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -77,16 +78,19 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileDO> implements 
                     FileDO fileDO = new FileDO();
                     BeanUtils.copyProperties(file, fileDO);
                     getBaseMapper().insert(fileDO);
-                    QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
-                    qw.eq("image_code",imageType);
-                    if (!ObjectUtils.isEmpty(saltImagesDao.selectList(qw))){
-                        saltImagesDao.delete(qw);
+                    if(!StringUtils.isEmpty(imageType)){
+                        QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
+                        qw.eq("image_code",imageType);
+                        if (!ObjectUtils.isEmpty(saltImagesDao.selectList(qw))){
+                            saltImagesDao.delete(qw);
+                        }
+                        SaltImagesEntity saltImagesEntity = new SaltImagesEntity();
+                        saltImagesEntity.setId(UUID.randomUUID().toString());
+                        saltImagesEntity.setImageCode(imageType);
+                        saltImagesEntity.setImageUrl("localhost:5000/assets/"+file.getPath());
+                        saltImagesDao.insert(saltImagesEntity);
                     }
-                    SaltImagesEntity saltImagesEntity = new SaltImagesEntity();
-                    saltImagesEntity.setId(UUID.randomUUID().toString());
-                    saltImagesEntity.setImageCode(imageType);
-                    saltImagesEntity.setImageUrl("localhost:5000/asserts/"+file.getPath());
-                    saltImagesDao.insert(saltImagesEntity);
+
                     res.add(transformDoToBo(fileDO, file.getKey()));
                 }catch (Exception e){
                     log.info("插入图片失败");

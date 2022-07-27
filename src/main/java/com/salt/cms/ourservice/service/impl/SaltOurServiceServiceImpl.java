@@ -1,8 +1,12 @@
 package com.salt.cms.ourservice.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.salt.cms.entity.SaltImagesEntity;
 import com.salt.cms.entity.SaltVideoEntity;
 import com.salt.cms.entity.SaltWordEntity;
+import com.salt.cms.homepage.dao.SaltImagesDao;
+import com.salt.cms.ourservice.dao.SaltCodeDao;
 import com.salt.cms.ourservice.dao.SaltVideoDao;
 import com.salt.cms.ourservice.dao.SaltWordDao;
 import com.salt.cms.ourservice.form.SaltVideoForm;
@@ -13,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,47 +30,27 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
     private SaltWordDao saltWordDao;
     @Autowired(required=false)
     private SaltVideoDao saltVideoDao;
+    @Autowired
+    private SaltCodeDao saltCodeDao;
+    @Autowired
+    private SaltImagesDao saltImagesDao;
 
-
-    @Override
-    public String getMusic() {
-        return saltVideoDao.getMusic();
-    }
-
-    @Override
-    public String getSoundDesign() {
-        return saltVideoDao.getSoundDesign();
-    }
-
-    @Override
-    public String getVoiceActing() {
-        return saltVideoDao.getVoiceActing();
-    }
-
-    @Override
-    public String getGameAudioPipeline() {
-        return saltVideoDao.getGameAudioPipeline();
-    }
-
-    @Override
-    public SaltWordForm getWhatWeDo() {
-        log.info(saltWordDao.getWhatWeDo().toString());
-        return saltWordDao.getWhatWeDo();
-    }
-
-    @Override
-    public SaltWordForm getWhatWeDoText() {
-        return saltWordDao.getWhatWeDoText();
-    }
-
-    @Override
-    public SaltWordForm getRotation() {
-        return saltWordDao.getRotation();
-    }
 
     @Override
     public List<SaltWordEntity> getWord() {
         return saltWordDao.getWord();
+    }
+
+    @Override
+    public List<String> getRotation() {
+        QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
+        qw.in("image_code","12","13","14","15");
+        List<SaltImagesEntity> imagesEntityList = saltImagesDao.selectList(qw);
+        List<String> list = new ArrayList<>();
+        for(SaltImagesEntity saltImagesEntity : imagesEntityList){
+            list.add(saltImagesEntity.getImageUrl());
+        }
+        return list;
     }
 
 
@@ -85,12 +69,13 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
     }
 
     @Override
-    public R deleteWord(String id) {
-        if (ObjectUtils.isEmpty(saltWordDao.selectById(id))){
-            return R.error("不存在该文本");
-        }
+    public SaltWordEntity getWordId(String id) {
+        return saltWordDao.selectById(id);
+    }
+
+    @Override
+    public void deleteWord(String id) {
         saltWordDao.deleteById(id);
-        return R.ok("删除成功");
     }
 
     @Override
@@ -108,8 +93,17 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
     }
 
     @Override
-    public List<SaltVideoEntity> getVideo() {
-        return saltVideoDao.getVideo();
+    public List<SaltVideoEntity> getVideoList() {
+        return null;
+    }
+
+    @Override
+    public String getVideo(String videoType) {
+        QueryWrapper<SaltVideoEntity> qw = new QueryWrapper<>();
+        qw.eq("video_type",videoType);
+        SaltVideoEntity saltVideoEntity = new SaltVideoEntity();
+        saltVideoEntity = saltVideoDao.selectOne(qw);
+        return saltVideoEntity.getVideoUrl();
     }
 
     @Override
@@ -133,6 +127,16 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
     public R deleteVideo(String id) {
         saltVideoDao.deleteById(id);
         return R.ok("成功");
+    }
+
+    @Override
+    public List<String> getWordType() {
+        return saltCodeDao.getWordType();
+    }
+
+    @Override
+    public SaltWordEntity getWordEntity(String id) {
+        return saltWordDao.selectById(id);
     }
 
 }

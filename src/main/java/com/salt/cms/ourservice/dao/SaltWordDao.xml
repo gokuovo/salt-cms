@@ -36,11 +36,13 @@
 
     <select id="getWord" resultType="com.salt.cms.entity.SaltWordEntity">
         select
-        (select code_name from salt_code c where w.word_type = c.wordType) wordType,
+        id id,
+        (select code_name from salt_code c where w.word_type = c.code and c.code_type = 'wordType') wordType,
         word_text_en wordTextEn,
         word_text_chi wordTextChi,
         word_text_jap wordTextJap,
-        word_text_spa wordTextSpa
+        word_text_spa wordTextSpa,
+        noti noti
         from salt_word w
     </select>
 

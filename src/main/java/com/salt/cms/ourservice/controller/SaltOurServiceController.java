@@ -6,14 +6,13 @@ import com.salt.cms.ourservice.form.SaltVideoForm;
 import com.salt.cms.ourservice.form.SaltWordForm;
 import com.salt.cms.ourservice.service.SaltOurServiceService;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.DeletedVO;
+import io.github.talelin.autoconfigure.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Slf4j
@@ -23,64 +22,30 @@ public class SaltOurServiceController {
     @Autowired(required=false)
     private SaltOurServiceService ourService;
 
-    @GetMapping("/getMusic")
-    public String getMusic(){
-        log.info("开始获取Music视频");
-        return ourService.getMusic();
+    //获取ourservice视频 cms、门户
+    @GetMapping("/getVideo")
+    public String getVideo(@RequestParam("videoType")String videoType){
+        return ourService.getVideo(videoType);
     }
 
-    @GetMapping("/getSoundDesign")
-    public String getSoundDesign(){
-        log.info("开始获取SoundDesign视频");
-        return ourService.getSoundDesign();
+    //获得文字段list cms已对接、门户
+    @GetMapping("/getWord")
+    public List<SaltWordEntity> getWord(){
+        List<SaltWordEntity> list = ourService.getWord();
+        return list;
     }
 
-    @GetMapping("/getVoiceActing")
-    public String getVoiceActing(){
-        log.info("开始获取VoiceActing视频");
-        return ourService.getVoiceActing();
-    }
-
-    @GetMapping("/getGameAudioPipeline")
-    public String getGameAudioPipeline(){
-        log.info("开始获取GameAudioPipeline视频");
-        return ourService.getGameAudioPipeline();
-    }
-
-    @GetMapping("/getWhatWeDo")
-    public SaltWordForm getWhatWeDo(){
-        log.info("开始获取WhatWeDo");
-        return ourService.getWhatWeDo();
-    }
-
-    @GetMapping("/getWhatWeDoText")
-    public SaltWordForm getWhatWeDoText(){
-        log.info("开始获取WhatWeDoText");
-        return ourService.getWhatWeDoText();
-    }
-
+    //获得轮播图 cms、门户
     @GetMapping("/getRotation")
-    public SaltWordForm getRotation(){
-        log.info("开始获取Rotation");
+    public List<String> getRotation(){
         return ourService.getRotation();
     }
 
-    @GetMapping("/getWord")
-    public R getWord(){
-        List<SaltWordEntity> list = ourService.getWord();
-        List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
-        if (!list.isEmpty()) {
-            for (SaltWordEntity word : list) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("wordType", word.getWordType());
-                map.put("wordTextEN", word.getWordTextEn());
-                map.put("wordTextChi", word.getWordTextChi());
-                map.put("wordTextJap", word.getWordTextJap());
-                map.put("wordTextSpa", word.getWordTextSpa());
-                listMap.add(map);
-            }
-        }
-        return R.ok().put("list", listMap);
+    //获得文字段详细信息
+    @GetMapping("/getWordOne")
+    public SaltWordEntity getWordEntity(@RequestParam("id") String id){
+        SaltWordEntity list = ourService.getWordEntity(id);
+        return list;
     }
 
 
@@ -95,14 +60,19 @@ public class SaltOurServiceController {
     }
 
     @PostMapping("/deleteWord")
-    public R deleteWord(@RequestBody String id){
-        return ourService.deleteWord(id);
+    public DeletedVO deleteWord(@RequestParam("id") String id){
+        SaltWordEntity word = ourService.getWordId(id);
+        if (word == null) {
+            throw new NotFoundException(10022);
+        }
+        ourService.deleteWord(id);
+        return new DeletedVO(14);
     }
 
-    @PostMapping("/getVideo")
-    public R getVideo(){
-        return R.ok().put("list",ourService.getVideo());
-    }
+//    @PostMapping("/getVideoList")
+//    public R getVideo(){
+//        return R.ok().put("list",ourService.getVideo());
+//    }
 
     @PostMapping("/addVideo")
     public R addVideo(@RequestBody SaltVideoForm saltVideoForm){
@@ -117,6 +87,11 @@ public class SaltOurServiceController {
     @PostMapping("/deleteVideo")
     public R deleteVideo(@RequestBody String id){
         return ourService.deleteVideo(id);
+    }
+
+    @GetMapping("/getWordType")
+    public List<String> getWordType(){
+        return ourService.getWordType();
     }
 
 }
