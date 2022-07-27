@@ -12,4 +12,5 @@ public class SaltMusicVideoEntity {
     private String title;
     private String url;
     private String album;
+    private String type; //0表示音乐,1表示视频
 }

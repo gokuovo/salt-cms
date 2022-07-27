@@ -25,7 +25,7 @@ public class SaltProjectController {
     @Autowired
     private SaltProjectService saltProjectService;
 
-    @GetMapping("/getProject")
+    @GetMapping("/getProject/{album}")
     public List<SaltMusicVideoEntity> getProject(@PathVariable("album")String album){
         log.info("开始获取project媒体信息");
         return saltProjectService.getProject(album);
@@ -43,7 +43,7 @@ public class SaltProjectController {
         return saltProjectService.getList();
     }
 
-    @GetMapping("/getProjectPage")
+    @GetMapping("/getProjectPage/{album}")
     public R getProjectPage(@PathVariable("album")String album){
         log.info("开始获取project媒体信息");
         return R.ok().put("list",saltProjectService.getProject(album));
