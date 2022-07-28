@@ -67,14 +67,14 @@ public class CommonConfiguration {
     /**
      * 接口中，自动转换的有：驼峰转换为下划线，空值输出null
      */
-    @Bean
-    public Jackson2ObjectMapperBuilderCustomizer customJackson() {
-        return jacksonObjectMapperBuilder -> {
-            // jacksonObjectMapperBuilder.serializationInclusion(JsonInclude.Include.NON_NULL);
-            jacksonObjectMapperBuilder.failOnUnknownProperties(false);
-            jacksonObjectMapperBuilder.propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
-        };
-    }
+//    @Bean
+//    public Jackson2ObjectMapperBuilderCustomizer customJackson() {
+//        return jacksonObjectMapperBuilder -> {
+//            // jacksonObjectMapperBuilder.serializationInclusion(JsonInclude.Include.NON_NULL);
+//            jacksonObjectMapperBuilder.failOnUnknownProperties(false);
+//            jacksonObjectMapperBuilder.propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+//        };
+//    }
 
     /**
      * 用于将 request 相关信息（如请求 url）放入 MDC 中供日志使用
