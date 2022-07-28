@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@TableName("salt_Video")
+@TableName("salt_video")
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class SaltVideoEntity {
