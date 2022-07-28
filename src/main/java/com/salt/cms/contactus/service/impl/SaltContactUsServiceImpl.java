@@ -34,6 +34,11 @@ public class SaltContactUsServiceImpl implements SaltContactUsService {
     }
 
     @Override
+    public List<SaltContactEntity> getContactList() {
+        return saltContactUsDao.getContactList();
+    }
+
+    @Override
     public R modifyContact(SaltContactForm contactUsForm) {
         SaltContactEntity saltContactEntity = new SaltContactEntity();
         saltContactEntity.setId(contactUsForm.getId());
@@ -47,25 +52,6 @@ public class SaltContactUsServiceImpl implements SaltContactUsService {
         return R.ok("修改成功");
     }
 
-    @Override
-    public R deleteContact(String id) {
-        saltContactUsDao.deleteById(id);
-        return R.ok("删除成功");
-    }
-
-    @Override
-    public R addContact(SaltContactForm contactUsForm) {
-        QueryWrapper<SaltContactEntity> qw = new QueryWrapper<>();
-        qw.eq("is_valid","1");
-        if (!ObjectUtils.isEmpty(saltContactUsDao.selectOne(qw))){
-            R.error("已存在有效地址，请设置失效后再添加");
-        }
-        SaltContactEntity saltContactEntity = new SaltContactEntity();
-        BeanUtils.copyProperties(contactUsForm,saltContactEntity);
-        saltContactEntity.setId(UUID.randomUUID().toString());
-        saltContactUsDao.insert(saltContactEntity);
-        return R.ok("添加成功");
-    }
 
     @Override
     public List<SaltSocialEntity> getSocialSix() {
