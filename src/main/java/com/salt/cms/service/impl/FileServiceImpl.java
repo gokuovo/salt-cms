@@ -65,8 +65,11 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileDO> implements 
                     return true;
                 }
                 // 已存在，则直接转化返回
-                res.add(transformDoToBo(found, file.getKey()));
-                return false;
+//                res.add(transformDoToBo(found, file.getKey()));
+                QueryWrapper<FileDO> qw = new QueryWrapper<>();
+                qw.eq("md5",file.getMd5());
+                baseMapper.delete(qw);
+                return true;
             }
 
 
@@ -87,7 +90,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileDO> implements 
                         SaltImagesEntity saltImagesEntity = new SaltImagesEntity();
                         saltImagesEntity.setId(UUID.randomUUID().toString());
                         saltImagesEntity.setImageCode(imageType);
-                        saltImagesEntity.setImageUrl("localhost:5000/assets/"+file.getPath());
+                        saltImagesEntity.setImageUrl("http://localhost:5000/assets/"+file.getPath());
                         saltImagesDao.insert(saltImagesEntity);
                     }
 

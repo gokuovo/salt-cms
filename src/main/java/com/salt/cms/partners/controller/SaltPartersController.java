@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 
 @Slf4j
@@ -20,8 +19,9 @@ public class SaltPartersController {
     private SaltPartnersService partnersService;
 
 
+    //获取友商图标 cms已对接、门户
     @GetMapping("/getPartners")
-    public List<Map<String, Object>> getPartners(){
+    public List<SaltPartnerEntity> getPartners(){
         log.info("开始获取所有合作商图标信息");
         return partnersService.getPartners();
     }
@@ -31,19 +31,21 @@ public class SaltPartersController {
         return partnersService.addPartners(partnersForm);
     }
 
-    @PostMapping("modifyPartners")
+    @PostMapping("/modifyPartners")
     public R modifyMenu(@RequestBody SaltPartnersForm partnersForm){
         return partnersService.modifyPartners(partnersForm);
     }
 
-    @PostMapping("deletePartners")
-    public R deleteMenu(@RequestBody String id){
+    //已对接
+    @PostMapping("/deletePartners")
+    public R deleteMenu(@RequestParam("id") String id){
         return partnersService.deletePartners(id);
     }
 
-    @GetMapping("selectPartner")
-    public R selectPartner(){
-        List<SaltPartnerEntity> list = partnersService.selectPartner();
-        return R.ok().put("list",list);
+    //已对接
+    @GetMapping("/selectPartner")
+    public SaltPartnerEntity selectPartner(@RequestParam("id") String id){
+        SaltPartnerEntity partner = partnersService.selectPartner(id);
+        return partner;
     }
 }

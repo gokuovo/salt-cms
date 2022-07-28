@@ -41,32 +41,17 @@ public class SaltOurServiceController {
         return ourService.getRotation(code);
     }
 
-    //获得文字段详细信息
+    //获得文字段详细信息 cms已对接
     @GetMapping("/getWordOne")
     public SaltWordEntity getWordEntity(@RequestParam("id") String id){
         SaltWordEntity list = ourService.getWordEntity(id);
         return list;
     }
 
-
-    @PostMapping("/addWord")
-    public R addWord(@RequestBody SaltWordForm saltWordForm){
-        return ourService.addWord(saltWordForm);
-    }
-
+    //修改文字段 cms已对接
     @PostMapping("/modifyWord")
     public R modifyWord(@RequestBody SaltWordForm saltWordForm){
         return ourService.modifyWord(saltWordForm);
-    }
-
-    @PostMapping("/deleteWord")
-    public DeletedVO deleteWord(@RequestParam("id") String id){
-        SaltWordEntity word = ourService.getWordId(id);
-        if (word == null) {
-            throw new NotFoundException(10022);
-        }
-        ourService.deleteWord(id);
-        return new DeletedVO(14);
     }
 
 //    @PostMapping("/getVideoList")
@@ -89,9 +74,5 @@ public class SaltOurServiceController {
         return ourService.deleteVideo(id);
     }
 
-    @GetMapping("/getWordType")
-    public List<String> getWordType(){
-        return ourService.getWordType();
-    }
 
 }

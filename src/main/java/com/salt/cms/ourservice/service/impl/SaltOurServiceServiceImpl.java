@@ -2,6 +2,7 @@ package com.salt.cms.ourservice.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.salt.cms.entity.SaltCodeEntity;
 import com.salt.cms.entity.SaltImagesEntity;
 import com.salt.cms.entity.SaltVideoEntity;
 import com.salt.cms.entity.SaltWordEntity;
@@ -83,10 +84,6 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
         return saltWordDao.selectById(id);
     }
 
-    @Override
-    public void deleteWord(String id) {
-        saltWordDao.deleteById(id);
-    }
 
     @Override
     public R modifyWord(SaltWordForm saltWordForm) {
@@ -137,11 +134,6 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
     public R deleteVideo(String id) {
         saltVideoDao.deleteById(id);
         return R.ok("成功");
-    }
-
-    @Override
-    public List<String> getWordType() {
-        return saltCodeDao.getWordType();
     }
 
     @Override

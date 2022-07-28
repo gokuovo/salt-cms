@@ -16,14 +16,11 @@ public interface SaltOurServiceService {
 
     R addWord(SaltWordForm saltWordForm);
     SaltWordEntity getWordId(String id);
-    void deleteWord(String id);
     R modifyWord(SaltWordForm saltWordForm);
     List<SaltVideoEntity> getVideoList();
     R addVideo(SaltVideoForm saltVideoForm);
     R modifyVideo(SaltVideoForm saltVideoForm);
     R deleteVideo(String id);
 
-
-    List<String> getWordType();
     SaltWordEntity getWordEntity(String id);
 }

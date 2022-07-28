@@ -1,7 +1,6 @@
 package com.salt.cms.partners.service.impl;
 
 import com.salt.cms.entity.SaltPartnerEntity;
-import com.salt.cms.entity.SaltWordEntity;
 import com.salt.cms.partners.dao.SaltPartnersDao;
 import com.salt.cms.partners.form.SaltPartnersForm;
 import com.salt.cms.partners.service.SaltPartnersService;
@@ -10,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Slf4j
@@ -24,24 +20,13 @@ public class SaltPartnersServiceImpl implements SaltPartnersService {
 
 
     @Override
-    public List<Map<String, Object>> getPartners() {
-        List<SaltPartnerEntity> list = saltPartnersDao.getPartners();
-        List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
-        if (!list.isEmpty()) {
-            for (SaltPartnerEntity partner : list) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("id", partner.getId());
-                map.put("partnerUrl", partner.getPartnerUrl());
-                map.put("partnerLink", partner.getPartnerLink());
-                listMap.add(map);
-            }
-        }
-        return listMap;
+    public List<SaltPartnerEntity> getPartners() {
+        return saltPartnersDao.getPartners();
     }
 
     @Override
-    public List<SaltPartnerEntity> selectPartner() {
-        return saltPartnersDao.selectPartner();
+    public SaltPartnerEntity selectPartner(String id) {
+        return saltPartnersDao.selectById(id);
     }
 
     @Override

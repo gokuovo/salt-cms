@@ -8,11 +8,12 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface SaltCodeDao extends BaseMapper<SaltCodeEntity> {
 
-    @Select("select code from salt_code where code_type = 'wordType'")
-    List<String> getWordType();
+    @Select("select code,code_name from salt_code where code_type = 'wordType'")
+    List<SaltCodeEntity> getWordType();
 
 }
