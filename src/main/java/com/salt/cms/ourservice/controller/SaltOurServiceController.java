@@ -7,6 +7,7 @@ import com.salt.cms.ourservice.form.SaltWordForm;
 import com.salt.cms.ourservice.service.SaltOurServiceService;
 import com.salt.cms.utils.R;
 import com.salt.cms.vo.DeletedVO;
+import com.salt.cms.vo.UpdatedVO;
 import io.github.talelin.autoconfigure.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,9 @@ public class SaltOurServiceController {
 
     //修改文字段 cms已对接
     @PostMapping("/modifyWord")
-    public R modifyWord(@RequestBody SaltWordForm saltWordForm){
-        return ourService.modifyWord(saltWordForm);
+    public UpdatedVO modifyWord(@RequestBody SaltWordForm saltWordForm){
+        ourService.modifyWord(saltWordForm);
+        return new UpdatedVO(13);
     }
 
 //    @PostMapping("/getVideoList")

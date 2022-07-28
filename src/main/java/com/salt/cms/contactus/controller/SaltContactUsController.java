@@ -6,6 +6,9 @@ import com.salt.cms.contactus.service.SaltContactUsService;
 import com.salt.cms.entity.SaltContactEntity;
 import com.salt.cms.entity.SaltSocialEntity;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.CreatedVO;
+import com.salt.cms.vo.DeletedVO;
+import com.salt.cms.vo.UpdatedVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,41 +35,57 @@ public class SaltContactUsController {
         return contactUsService.getContactList();
     }
     //cms
-    @PostMapping("modifyContact")
-    public R modifyContact(@RequestBody SaltContactForm contactUsForm){
-        return contactUsService.modifyContact(contactUsForm);
+    @PostMapping("/modifyContact")
+    public UpdatedVO modifyContact(@RequestBody SaltContactForm contactUsForm){
+        contactUsService.modifyContact(contactUsForm);
+        return new UpdatedVO(13);
     }
-
 //    //-------------------------------------------contactus联系方式-------------------------------------------
 //
 //
 //
 //    //-------------------------------------------联系图标-------------------------------------------
-    @GetMapping("getSocialSix")
-    public R getSocialSix(){
+    @GetMapping("/getSocialSix")
+    public List<SaltSocialEntity> getSocialSix(){
         List<SaltSocialEntity> list = contactUsService.getSocialSix();
-        return R.ok().put("list",list);
+        return list;
     }
 
-    @GetMapping("getSocialFour")
-    public R getSocialFour(){
+    @GetMapping("/getSocialFour")
+    public List<SaltSocialEntity> getSocialFour(){
         List<SaltSocialEntity> list = contactUsService.getSocialFour();
-        return R.ok().put("list",list);
+        return list;
     }
 
-    @PostMapping("addSocial")
-    public R addSocial(@RequestBody SaltSocialForm saltSocialForm){
-        return contactUsService.addSocial(saltSocialForm);
+    //cms
+    @GetMapping("/getSocial")
+    public List<SaltSocialEntity> getSocial(){
+        List<SaltSocialEntity> list = contactUsService.getSocial();
+        return list;
+    }
+    //cms
+    @GetMapping("/getSocialOne")
+    public SaltSocialEntity getSocialOne(@RequestParam("id") String id){
+        return contactUsService.getSocialOne(id);
     }
 
-    @PostMapping("deleteSocial")
-    public R deleteSocial(@RequestBody String id){
-        return contactUsService.deleteSocial(id);
+
+    @PostMapping("/addSocial")
+    public CreatedVO addSocial(@RequestBody SaltSocialForm saltSocialForm){
+        contactUsService.addSocial(saltSocialForm);
+        return new CreatedVO(12);
     }
 
-    @PostMapping("modifySocial")
-    public R modifySocial(@RequestBody SaltSocialForm saltSocialForm){
-        return contactUsService.modifySocial(saltSocialForm);
+    @PostMapping("/deleteSocial")
+    public DeletedVO deleteSocial(@RequestParam("id") String id){
+        contactUsService.deleteSocial(id);
+        return new DeletedVO(14);
+    }
+
+    @PostMapping("/modifySocial")
+    public UpdatedVO modifySocial(@RequestBody SaltSocialForm saltSocialForm){
+        contactUsService.modifySocial(saltSocialForm);
+        return new UpdatedVO(13);
     }
 //    //-------------------------------------------联系图标-------------------------------------------
 

@@ -15,6 +15,8 @@ public interface SaltContactUsService {
     R modifyContact(SaltContactForm contactUsForm);
     List<SaltSocialEntity> getSocialSix();
     List<SaltSocialEntity> getSocialFour();
+    List<SaltSocialEntity> getSocial();
+    SaltSocialEntity getSocialOne(String id);
     R addSocial(SaltSocialForm saltSocialForm);
     R deleteSocial(String id);
     R modifySocial(SaltSocialForm saltSocialForm);

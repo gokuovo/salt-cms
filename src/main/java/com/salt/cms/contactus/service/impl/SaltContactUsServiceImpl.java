@@ -64,6 +64,16 @@ public class SaltContactUsServiceImpl implements SaltContactUsService {
     }
 
     @Override
+    public List<SaltSocialEntity> getSocial() {
+        return saltContactUsDao.getSocial();
+    }
+
+    @Override
+    public SaltSocialEntity getSocialOne(String id) {
+        return saltSocialDao.selectById(id);
+    }
+
+    @Override
     public R addSocial(SaltSocialForm saltSocialForm) {
         SaltSocialEntity saltSocialEntity = new SaltSocialEntity();
         saltSocialEntity.setId(UUID.randomUUID().toString());

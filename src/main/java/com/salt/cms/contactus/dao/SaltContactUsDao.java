@@ -22,6 +22,9 @@ public interface SaltContactUsDao extends BaseMapper<SaltContactEntity> {
     @Select("select * from salt_social limit 4")
     List<SaltSocialEntity> getSocialFour();
 
+    @Select("select * from salt_social")
+    List<SaltSocialEntity> getSocial();
+
     @Select("select * from salt_contact")
     List<SaltContactEntity> getContactList();
 
