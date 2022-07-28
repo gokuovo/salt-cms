@@ -12,7 +12,7 @@ public interface SaltOurServiceService {
 
     String getVideo(String videoType);
     List<SaltWordEntity> getWord();
-    List<String> getRotation();
+    List<String> getRotation(String code);
 
     R addWord(SaltWordForm saltWordForm);
     SaltWordEntity getWordId(String id);

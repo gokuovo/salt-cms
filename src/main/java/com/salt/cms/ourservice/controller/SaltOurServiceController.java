@@ -37,8 +37,8 @@ public class SaltOurServiceController {
 
     //获得轮播图 cms、门户
     @GetMapping("/getRotation")
-    public List<String> getRotation(){
-        return ourService.getRotation();
+    public List<String> getRotation(@RequestParam("code")String code){
+        return ourService.getRotation(code);
     }
 
     //获得文字段详细信息

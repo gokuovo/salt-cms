@@ -42,9 +42,19 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
     }
 
     @Override
-    public List<String> getRotation() {
+    public List<String> getRotation(String code) {
         QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
-        qw.in("image_code","12","13","14","15");
+        String image_code;
+        if(code.equals("0")){
+            image_code = "12";
+        }else if(code.equals("1")){
+            image_code = "13";
+        }else if(code.equals("2")){
+            image_code = "14";
+        }else{
+            image_code = "15";
+        }
+        qw.eq("image_code",image_code);
         List<SaltImagesEntity> imagesEntityList = saltImagesDao.selectList(qw);
         List<String> list = new ArrayList<>();
         for(SaltImagesEntity saltImagesEntity : imagesEntityList){
