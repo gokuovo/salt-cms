@@ -11,7 +11,7 @@ public interface SaltHomepageService {
 
     String getLogo();
 
-    List<SaltImagesForm> getBackground();
+    List<SaltImagesEntity> getBackground();
 
     List<SaltImagesEntity> getImagesByImageCode(String imageCode);
 

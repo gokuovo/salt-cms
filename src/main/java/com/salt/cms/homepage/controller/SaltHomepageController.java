@@ -36,7 +36,7 @@ public class SaltHomepageController {
     }
 
     @GetMapping("/getBackgroundUnder")
-    public List<SaltImagesForm> getBackground(){
+    public List<SaltImagesEntity> getBackground(){
         log.info("开始获取背景");
         return saltHomepageService.getBackground();
     }

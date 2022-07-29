@@ -2,7 +2,7 @@ package com.salt.cms.homepage.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.salt.cms.entity.SaltImagesEntity;
@@ -33,8 +33,21 @@ public class SaltHomepageServiceImpl extends ServiceImpl<SaltImagesDao,SaltImage
     }
 
     @Override
-    public List<SaltImagesForm> getBackground() {
-        return saltImagesDao.getBackground();
+    public List<SaltImagesEntity> getBackground() {
+        QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
+        List<String> list = new ArrayList<>();
+        list.add("02");
+        list.add("03");
+        list.add("04");
+        list.add("05");
+        list.add("06");
+        list.add("07");
+        list.add("08");
+        list.add("09");
+        list.add("10");
+        qw.in("image_code",list);
+        List<SaltImagesEntity> saltImagesEntities = saltImagesDao.getBackground(qw);
+        return saltImagesDao.selectList(qw);
     }
 
     @Override
