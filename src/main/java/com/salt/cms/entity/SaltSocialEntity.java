@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class SaltSocialEntity {
     private String id;
-    private String connectCode;
+    private String connectType;
     private String imageUrl;
     private String contactUrl;
 }

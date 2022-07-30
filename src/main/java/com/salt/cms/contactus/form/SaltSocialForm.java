@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SaltSocialForm {
     private String id;
-    private String connectCode;
+    private String connectType;
     private String imageUrl;
     private String contactUrl;
 }
