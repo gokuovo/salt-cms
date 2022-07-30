@@ -77,7 +77,7 @@ public class SaltContactUsServiceImpl implements SaltContactUsService {
     public R addSocial(SaltSocialForm saltSocialForm) {
         SaltSocialEntity saltSocialEntity = new SaltSocialEntity();
         saltSocialEntity.setId(UUID.randomUUID().toString());
-        saltSocialEntity.setConnectCode(saltSocialForm.getConnectCode());
+        saltSocialEntity.setConnectType(saltSocialForm.getConnectType());
         saltSocialEntity.setContactUrl(saltSocialForm.getContactUrl());
         saltSocialEntity.setImageUrl(saltSocialForm.getImageUrl());
         saltSocialDao.insert(saltSocialEntity);
@@ -94,7 +94,7 @@ public class SaltContactUsServiceImpl implements SaltContactUsService {
     public R modifySocial(SaltSocialForm saltSocialForm) {
         SaltSocialEntity saltSocialEntity = new SaltSocialEntity();
         saltSocialEntity.setId(saltSocialForm.getId());
-        saltSocialEntity.setConnectCode(saltSocialForm.getConnectCode());
+        saltSocialEntity.setConnectType(saltSocialForm.getConnectType());
         saltSocialEntity.setContactUrl(saltSocialForm.getContactUrl());
         saltSocialEntity.setImageUrl(saltSocialForm.getImageUrl());
         saltSocialDao.updateById(saltSocialEntity);
