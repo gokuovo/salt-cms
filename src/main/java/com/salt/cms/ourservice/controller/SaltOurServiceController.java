@@ -1,6 +1,7 @@
 package com.salt.cms.ourservice.controller;
 
 
+import com.salt.cms.entity.SaltImagesEntity;
 import com.salt.cms.entity.SaltWordEntity;
 import com.salt.cms.ourservice.form.SaltVideoForm;
 import com.salt.cms.ourservice.form.SaltWordForm;
@@ -40,6 +41,11 @@ public class SaltOurServiceController {
     @GetMapping("/getRotation")
     public List<String> getRotation(@RequestParam("code")String code){
         return ourService.getRotation(code);
+    }
+
+    @GetMapping("/getRotationList")
+    public List<SaltImagesEntity> getRotationList(){
+        return ourService.getRotationList();
     }
 
     //获得文字段详细信息 cms已对接

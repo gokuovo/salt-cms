@@ -1,5 +1,6 @@
 package com.salt.cms.ourservice.service;
 
+import com.salt.cms.entity.SaltImagesEntity;
 import com.salt.cms.entity.SaltVideoEntity;
 import com.salt.cms.entity.SaltWordEntity;
 import com.salt.cms.ourservice.form.SaltVideoForm;
@@ -13,7 +14,7 @@ public interface SaltOurServiceService {
     String getVideo(String videoType);
     List<SaltWordEntity> getWord();
     List<String> getRotation(String code);
-
+    List<SaltImagesEntity> getRotationList();
     R addWord(SaltWordForm saltWordForm);
     SaltWordEntity getWordId(String id);
     R modifyWord(SaltWordForm saltWordForm);

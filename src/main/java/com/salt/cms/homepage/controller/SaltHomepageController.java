@@ -1,19 +1,13 @@
 package com.salt.cms.homepage.controller;
 
-import com.salt.cms.bo.FileBO;
 import com.salt.cms.entity.SaltImagesEntity;
 import com.salt.cms.homepage.form.SaltImagesForm;
-import com.salt.cms.menu.form.SPMenuForm;
 import com.salt.cms.service.FileService;
 import com.salt.cms.utils.R;
-import io.github.talelin.core.annotation.LoginRequired;
 import com.salt.cms.homepage.service.SaltHomepageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
 
@@ -67,8 +61,8 @@ public class SaltHomepageController {
         return saltHomepageService.modifyImage(saltImagesForm);
     }
 
-    @PostMapping("listImage")
-    public R listImage(){
-        return R.ok().put("list",saltHomepageService.listImage());
+    @GetMapping("/getBackgroundById")
+    public SaltImagesEntity getBackgroundById(@RequestParam("id")String id){
+        return saltHomepageService.getBackgroundById(id);
     }
 }

@@ -11,5 +11,6 @@
             reserve reserve
         from salt_images i
         ${ew.customSqlSegment}
+        order by image_code
     </select>
 </mapper>

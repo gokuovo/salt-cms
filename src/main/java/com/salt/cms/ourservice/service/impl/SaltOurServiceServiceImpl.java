@@ -2,7 +2,6 @@ package com.salt.cms.ourservice.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.salt.cms.entity.SaltCodeEntity;
 import com.salt.cms.entity.SaltImagesEntity;
 import com.salt.cms.entity.SaltVideoEntity;
 import com.salt.cms.entity.SaltWordEntity;
@@ -62,6 +61,18 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
             list.add(saltImagesEntity.getImageUrl());
         }
         return list;
+    }
+
+    @Override
+    public List<SaltImagesEntity> getRotationList() {
+        List<String> list = new ArrayList<>();
+        list.add("15");
+        list.add("12");
+        list.add("13");
+        list.add("14");
+        QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
+        qw.in("image_code",list);
+        return saltImagesDao.getBackground(qw);
     }
 
 

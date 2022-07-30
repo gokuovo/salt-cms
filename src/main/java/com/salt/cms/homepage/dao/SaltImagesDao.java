@@ -22,7 +22,5 @@ public interface SaltImagesDao extends BaseMapper<SaltImagesEntity> {
 
     List<SaltImagesEntity> getBackground(@Param(Constants.WRAPPER) QueryWrapper<SaltImagesEntity> qw);
 
-    @Select("select * from salt_images")
-    List<SaltImagesEntity> listImage();
 
 }

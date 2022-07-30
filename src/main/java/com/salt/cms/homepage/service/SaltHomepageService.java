@@ -21,5 +21,5 @@ public interface SaltHomepageService {
 
     R deleteImage(String id);
 
-    List<SaltImagesEntity> listImage();
+    SaltImagesEntity getBackgroundById(String id);
 }

@@ -47,7 +47,7 @@ public class SaltHomepageServiceImpl extends ServiceImpl<SaltImagesDao,SaltImage
         list.add("10");
         qw.in("image_code",list);
         List<SaltImagesEntity> saltImagesEntities = saltImagesDao.getBackground(qw);
-        return saltImagesDao.selectList(qw);
+        return saltImagesEntities;
     }
 
     @Override
@@ -86,9 +86,27 @@ public class SaltHomepageServiceImpl extends ServiceImpl<SaltImagesDao,SaltImage
     }
 
     @Override
-    public List<SaltImagesEntity> listImage() {
-        return saltImagesDao.listImage();
+    public SaltImagesEntity getBackgroundById(String id) {
+//        QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
+//        if ("首页背景底图".equals(id)){
+//            qw.eq("image_code","02");
+//        }else if ("首页背景顶图".equals(id)){
+//            qw.eq("image_code","03");
+//        }else if ("ourservice背景".equals(id)){
+//            qw.eq("image_code","04");
+//        }else if ("project背景".equals(id)){
+//            qw.eq("image_code","05");
+//        }else if ("contactus背景".equals(id)){
+//            qw.eq("image_code","06");
+//        }else if ("team背景".equals(id)){
+//            qw.eq("image_code","07");
+//        }else if ("news背景".equals(id)){
+//            qw.eq("image_code","08");
+//        }else if ("partner背景".equals(id)){
+//            qw.eq("image_code","09");
+//        }else if ("contactUs移动背景图".equals(id)){
+//            qw.eq("image_code","10");
+//        }
+        return saltImagesDao.selectById(id);
     }
-
-
 }
