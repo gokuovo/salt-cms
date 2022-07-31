@@ -15,4 +15,5 @@ public class SaltWorklogForm {
     private String dateSpa;
     private String url;
     private String link;
+    private String sort;
 }

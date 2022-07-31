@@ -7,10 +7,14 @@ import com.salt.cms.entity.SaltMusicVideoEntity;
 import com.salt.cms.menu.form.SPMenuForm;
 import com.salt.cms.menu.service.SaltPortalMenuService;
 import com.salt.cms.news.form.SaltNewsForm;
+import com.salt.cms.projects.dao.SaltAlbumDao;
 import com.salt.cms.projects.form.SaltListForm;
 import com.salt.cms.projects.form.SaltMusicVideoForm;
 import com.salt.cms.projects.service.SaltProjectService;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.CreatedVO;
+import com.salt.cms.vo.DeletedVO;
+import com.salt.cms.vo.UpdatedVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +41,39 @@ public class SaltProjectController {
         return saltProjectService.getAlbum();
     }
 
+    @GetMapping("/getAlbumOne")
+    public SaltAlbumEntity getAlbumOne(@RequestParam("id")String id){
+        log.info("开始获取专辑信息");
+        return saltProjectService.getAlbumOne(id);
+    }
+
+    @PostMapping("/addAlbum")
+    public CreatedVO addAlbum(@RequestBody SaltAlbumEntity saltAlbumEntity){
+        return saltProjectService.addAlbum(saltAlbumEntity);
+    }
+
+    @PostMapping("/modifyAlbum")
+    public UpdatedVO modifyAlbum(@RequestBody SaltAlbumEntity saltAlbumEntity){
+        return saltProjectService.modifyAlbum(saltAlbumEntity);
+    }
+
+    @PostMapping("/deleteAlbum")
+    public DeletedVO deleteAlbum(@RequestParam("id") String id){
+        return saltProjectService.deleteAlbum(id);
+    }
+
+
+
     @GetMapping("/getList")
     public List<SaltListEntity> getList(){
         log.info("开始获取project页面list信息");
         return saltProjectService.getList();
+    }
+
+    @GetMapping("/getListOne")
+    public SaltListEntity getListOne(@RequestParam("id")String id){
+        log.info("开始获取project页面list信息");
+        return saltProjectService.getListOne(id);
     }
 
     @GetMapping("/getProjectPage/{album}")
@@ -80,17 +113,17 @@ public class SaltProjectController {
 
 
     @PostMapping("/addList")
-    public R addList(@RequestBody SaltListForm saltListForm){
+    public CreatedVO addList(@RequestBody SaltListForm saltListForm){
         return saltProjectService.addList(saltListForm);
     }
 
     @PostMapping("modifyList")
-    public R modifyList(@RequestBody SaltListForm saltListForm){
+    public UpdatedVO modifyList(@RequestBody SaltListForm saltListForm){
         return saltProjectService.modifyList(saltListForm);
     }
 
     @PostMapping("deleteList")
-    public R deleteList(@RequestBody String id){
+    public DeletedVO deleteList(@RequestParam("id") String id){
         return saltProjectService.deleteList(id);
     }
 

@@ -11,6 +11,9 @@ import com.salt.cms.projects.form.SaltListForm;
 import com.salt.cms.projects.form.SaltMusicVideoForm;
 import com.salt.cms.projects.service.SaltProjectService;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.CreatedVO;
+import com.salt.cms.vo.DeletedVO;
+import com.salt.cms.vo.UpdatedVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,8 +47,41 @@ public class SaltProjectServiceImpl implements SaltProjectService {
     }
 
     @Override
+    public SaltAlbumEntity getAlbumOne(String id) {
+        return saltAlbumDao.selectById(id);
+    }
+
+    @Override
+    public CreatedVO addAlbum(SaltAlbumEntity saltAlbumEntity) {
+        SaltAlbumEntity saltAlbum = new SaltAlbumEntity();
+        BeanUtils.copyProperties(saltAlbumEntity,saltAlbum);
+        saltAlbum.setId(UUID.randomUUID().toString());
+        saltAlbumDao.insert(saltAlbum);
+        return new CreatedVO("添加成功");
+    }
+
+    @Override
+    public UpdatedVO modifyAlbum(SaltAlbumEntity saltAlbumEntity) {
+        SaltAlbumEntity saltAlbum = new SaltAlbumEntity();
+        BeanUtils.copyProperties(saltAlbumEntity,saltAlbum);
+        saltAlbumDao.updateById(saltAlbum);
+        return new UpdatedVO("更新成功");
+    }
+
+    @Override
+    public DeletedVO deleteAlbum(String id) {
+        saltAlbumDao.deleteById(id);
+        return new DeletedVO("删除成功");
+    }
+
+    @Override
     public List<SaltListEntity> getList() {
         return saltAlbumDao.getList();
+    }
+
+    @Override
+    public SaltListEntity getListOne(String id) {
+        return saltListDao.selectById(id);
     }
 
     @Override
@@ -72,25 +108,25 @@ public class SaltProjectServiceImpl implements SaltProjectService {
     }
 
     @Override
-    public R addList(SaltListForm saltListForm) {
+    public CreatedVO addList(SaltListForm saltListForm) {
         SaltListEntity saltListEntity = new SaltListEntity();
         BeanUtils.copyProperties(saltListForm,saltListEntity);
         saltListEntity.setId(UUID.randomUUID().toString());
         saltListDao.insert(saltListEntity);
-        return R.ok("成功");
+        return new CreatedVO("成功");
     }
 
     @Override
-    public R modifyList(SaltListForm saltListForm) {
+    public UpdatedVO modifyList(SaltListForm saltListForm) {
         SaltListEntity saltListEntity = new SaltListEntity();
         BeanUtils.copyProperties(saltListForm,saltListEntity);
         saltListDao.updateById(saltListEntity);
-        return R.ok("成功");
+        return new UpdatedVO("成功");
     }
 
     @Override
-    public R deleteList(String id) {
+    public DeletedVO deleteList(String id) {
         saltListDao.deleteById(id);
-        return R.ok("成功");
+        return new DeletedVO("成功");
     }
 }

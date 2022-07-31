@@ -5,7 +5,9 @@ import com.salt.cms.entity.SaltWordEntity;
 import com.salt.cms.team.form.SaltTeamForm;
 import com.salt.cms.team.service.SaltTeamService;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.CreatedVO;
 import com.salt.cms.vo.DeletedVO;
+import com.salt.cms.vo.UpdatedVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,13 +38,19 @@ public class SaltTeamController {
         return saltTeamervice.getStaff();
     }
 
+    @GetMapping("/getStaffOne")
+    public SaltStaffEntity getStaffOne(@RequestParam("id")String id){
+        log.info("开始获取staff信息");
+        return saltTeamervice.getStaffOne(id);
+    }
+
     @PostMapping("/addStaff")
-    public R addStaff(@RequestBody SaltTeamForm staffForm){
+    public CreatedVO addStaff(@RequestBody SaltTeamForm staffForm){
         return saltTeamervice.addStaff(staffForm);
     }
 
     @PostMapping("/modifyStaff")
-    public R modifyStaff(@RequestBody SaltTeamForm staffForm){
+    public UpdatedVO modifyStaff(@RequestBody SaltTeamForm staffForm){
         return saltTeamervice.modifyStaff(staffForm);
     }
 

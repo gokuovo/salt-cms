@@ -4,6 +4,9 @@ import com.salt.cms.entity.SaltPartnerEntity;
 import com.salt.cms.partners.form.SaltPartnersForm;
 import com.salt.cms.partners.service.SaltPartnersService;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.CreatedVO;
+import com.salt.cms.vo.DeletedVO;
+import com.salt.cms.vo.UpdatedVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,18 +30,18 @@ public class SaltPartersController {
     }
 
     @PostMapping("/addPartners")
-    public R addMenu(@RequestBody SaltPartnersForm partnersForm){
+    public CreatedVO addMenu(@RequestBody SaltPartnersForm partnersForm){
         return partnersService.addPartners(partnersForm);
     }
 
     @PostMapping("/modifyPartners")
-    public R modifyMenu(@RequestBody SaltPartnersForm partnersForm){
+    public UpdatedVO modifyMenu(@RequestBody SaltPartnersForm partnersForm){
         return partnersService.modifyPartners(partnersForm);
     }
 
     //已对接
     @PostMapping("/deletePartners")
-    public R deleteMenu(@RequestParam("id") String id){
+    public DeletedVO deleteMenu(@RequestParam("id") String id){
         return partnersService.deletePartners(id);
     }
 

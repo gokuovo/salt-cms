@@ -5,6 +5,9 @@ import com.salt.cms.partners.dao.SaltPartnersDao;
 import com.salt.cms.partners.form.SaltPartnersForm;
 import com.salt.cms.partners.service.SaltPartnersService;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.CreatedVO;
+import com.salt.cms.vo.DeletedVO;
+import com.salt.cms.vo.UpdatedVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +33,7 @@ public class SaltPartnersServiceImpl implements SaltPartnersService {
     }
 
     @Override
-    public R addPartners(SaltPartnersForm partnersForm) {
+    public CreatedVO addPartners(SaltPartnersForm partnersForm) {
         SaltPartnerEntity partnerEntity = new SaltPartnerEntity();
         partnerEntity.setId(partnersForm.getId());
         partnerEntity.setPartnerName(partnersForm.getPartnerName());
@@ -38,11 +41,11 @@ public class SaltPartnersServiceImpl implements SaltPartnersService {
         partnerEntity.setPartnerLink(partnersForm.getPartnerLink());
         partnerEntity.setSort(partnersForm.getSort());
         saltPartnersDao.insert(partnerEntity);
-        return R.ok("添加成功");
+        return new CreatedVO("添加成功");
     }
 
     @Override
-    public R modifyPartners(SaltPartnersForm partnersForm) {
+    public UpdatedVO modifyPartners(SaltPartnersForm partnersForm) {
         SaltPartnerEntity partnerEntity = new SaltPartnerEntity();
         partnerEntity.setId(partnersForm.getId());
         partnerEntity.setPartnerName(partnersForm.getPartnerName());
@@ -50,12 +53,12 @@ public class SaltPartnersServiceImpl implements SaltPartnersService {
         partnerEntity.setPartnerLink(partnersForm.getPartnerLink());
         partnerEntity.setSort(partnersForm.getSort());
         saltPartnersDao.updateById(partnerEntity);
-        return R.ok("修改成功");
+        return new UpdatedVO("修改成功");
     }
 
     @Override
-    public R deletePartners(String id) {
+    public DeletedVO deletePartners(String id) {
         saltPartnersDao.deleteById(id);
-        return R.ok("删除成功");
+        return new DeletedVO("删除成功");
     }
 }

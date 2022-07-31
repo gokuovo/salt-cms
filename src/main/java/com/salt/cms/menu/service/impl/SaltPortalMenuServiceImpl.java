@@ -7,6 +7,7 @@ import com.salt.cms.menu.dao.SaltPortalMenuDao;
 import com.salt.cms.menu.form.SPMenuForm;
 import com.salt.cms.menu.service.SaltPortalMenuService;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.UpdatedVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,13 @@ public class SaltPortalMenuServiceImpl implements SaltPortalMenuService {
     @Override
     public List<SaltPortalMenuEntity> listMenu() {
         return saltPortalMenuDao.listMenu();
+    }
+
+    @Override
+    public SaltPortalMenuEntity menuById(String id) {
+        QueryWrapper<SaltPortalMenuEntity> qw = new QueryWrapper<>();
+        qw.eq("id",id);
+        return saltPortalMenuDao.selectOne(qw);
     }
 
     @Override
@@ -66,14 +74,11 @@ public class SaltPortalMenuServiceImpl implements SaltPortalMenuService {
     }
 
     @Override
-    public R modifyMenu(SPMenuForm spMenuForm) {
-        if (!Character.isDigit(spMenuForm.getSort())){
-            return R.error("请输入数字");
-        }
+    public UpdatedVO modifyMenu(SPMenuForm spMenuForm) {
         SaltPortalMenuEntity saltPortalMenuEntity = new SaltPortalMenuEntity();
         BeanUtils.copyProperties(spMenuForm,saltPortalMenuEntity);
         saltPortalMenuDao.updateById(saltPortalMenuEntity);
-        return R.ok();
+        return new UpdatedVO("更新成功");
     }
 
     @Override

@@ -1,8 +1,12 @@
 package com.salt.cms.news.service;
 
+import com.salt.cms.entity.SaltNewsEntity;
+import com.salt.cms.entity.SaltWorklogEntity;
 import com.salt.cms.news.form.SaltNewsForm;
 import com.salt.cms.news.form.SaltWorklogForm;
-import com.salt.cms.utils.R;
+import com.salt.cms.vo.CreatedVO;
+import com.salt.cms.vo.DeletedVO;
+import com.salt.cms.vo.UpdatedVO;
 
 import java.util.List;
 
@@ -10,13 +14,16 @@ public interface SaltNewsService {
     List<SaltNewsForm> getNews();
     List<SaltWorklogForm> getWorklog();
 
-    R addNews(SaltNewsForm saltNewsForm);
-    R deleteNews(String id);
-    R modifyNews(SaltNewsForm saltNewsForm);
+    SaltNewsEntity getNewsOne(String id);
+    SaltWorklogEntity getWorklogOne(String id);
+
+    CreatedVO addNews(SaltNewsForm saltNewsForm);
+    DeletedVO deleteNews(String id);
+    UpdatedVO modifyNews(SaltNewsForm saltNewsForm);
 
 
-    R addWorklog(SaltWorklogForm saltWorklogForm);
-    R deleteWorklog(String id);
-    R modifyWorklog(SaltWorklogForm saltWorklogForm);
+    CreatedVO addWorklog(SaltWorklogForm saltWorklogForm);
+    DeletedVO deleteWorklog(String id);
+    UpdatedVO modifyWorklog(SaltWorklogForm saltWorklogForm);
 
 }

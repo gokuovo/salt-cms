@@ -9,6 +9,9 @@ import com.salt.cms.news.form.SaltNewsForm;
 import com.salt.cms.news.form.SaltWorklogForm;
 import com.salt.cms.news.service.SaltNewsService;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.CreatedVO;
+import com.salt.cms.vo.DeletedVO;
+import com.salt.cms.vo.UpdatedVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,50 +39,60 @@ public class SaltNewsServiceImpl implements SaltNewsService {
     }
 
     @Override
-    public R addNews(SaltNewsForm saltNewsForm) {
+    public SaltNewsEntity getNewsOne(String id) {
+        return saltNewsDao.selectById(id);
+    }
+
+    @Override
+    public SaltWorklogEntity getWorklogOne(String id) {
+        return saltWorklogDao.selectById(id);
+    }
+
+    @Override
+    public CreatedVO addNews(SaltNewsForm saltNewsForm) {
         SaltNewsEntity saltNewsEntity = new SaltNewsEntity();
         BeanUtils.copyProperties(saltNewsForm,saltNewsEntity);
         saltNewsEntity.setId(UUID.randomUUID().toString());
         saltNewsDao.insert(saltNewsEntity);
-        return R.ok("添加成功");
+        return new CreatedVO("添加成功");
     }
 
     @Override
-    public R deleteNews(String id) {
+    public DeletedVO deleteNews(String id) {
         saltNewsDao.deleteById(id);
-        return R.ok("成功");
+        return new DeletedVO("删除成功");
     }
 
     @Override
-    public R modifyNews(SaltNewsForm saltNewsForm) {
+    public UpdatedVO modifyNews(SaltNewsForm saltNewsForm) {
         SaltNewsEntity saltNewsEntity = new SaltNewsEntity();
         BeanUtils.copyProperties(saltNewsForm,saltNewsEntity);
         saltNewsDao.updateById(saltNewsEntity);
-        return R.ok("修改成功");
+        return new UpdatedVO("修改成功");
     }
 
     @Override
-    public R addWorklog(SaltWorklogForm saltWorklogForm) {
+    public CreatedVO addWorklog(SaltWorklogForm saltWorklogForm) {
         SaltWorklogEntity saltWorklogEntity = new SaltWorklogEntity();
         BeanUtils.copyProperties(saltWorklogForm,saltWorklogEntity);
         saltWorklogEntity.setId(UUID.randomUUID().toString());
         saltWorklogDao.insert(saltWorklogEntity);
-        return R.ok("成功");
+        return new CreatedVO("成功");
     }
 
     @Override
-    public R deleteWorklog(String id) {
+    public DeletedVO deleteWorklog(String id) {
         saltWorklogDao.deleteById(id);
-        return R.ok("成功");
+        return new DeletedVO("成功");
     }
 
     @Override
-    public R modifyWorklog(SaltWorklogForm saltWorklogForm) {
+    public UpdatedVO modifyWorklog(SaltWorklogForm saltWorklogForm) {
         SaltWorklogEntity saltWorklogEntity = new SaltWorklogEntity();
         BeanUtils.copyProperties(saltWorklogForm,saltWorklogEntity);
-        saltWorklogEntity.setId(UUID.randomUUID().toString());
+        saltWorklogEntity.setId(saltWorklogForm.getId());
         saltWorklogDao.updateById(saltWorklogEntity);
-        return R.ok("成功");
+        return new UpdatedVO("成功");
     }
 
 }

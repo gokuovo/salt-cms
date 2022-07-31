@@ -23,4 +23,5 @@ public class SaltListForm {
     private String platformSpa;
     private String url;
     private String link;
+    private String sort;
 }

@@ -5,7 +5,11 @@ import com.salt.cms.team.dao.SaltStaffDao;
 import com.salt.cms.team.form.SaltTeamForm;
 import com.salt.cms.team.service.SaltTeamService;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.CreatedVO;
+import com.salt.cms.vo.DeletedVO;
+import com.salt.cms.vo.UpdatedVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,48 +35,30 @@ public class SaltTeamServiceImpl implements SaltTeamService {
     }
 
     @Override
-    public R addStaff(SaltTeamForm saltTeamForm) {
+    public SaltStaffEntity getStaffOne(String id) {
+        return saltStaffDao.selectById(id);
+    }
+
+    @Override
+    public CreatedVO addStaff(SaltTeamForm saltTeamForm) {
         SaltStaffEntity saltStaffEntity = new SaltStaffEntity();
+        BeanUtils.copyProperties(saltTeamForm,saltStaffEntity);
         saltStaffEntity.setId(UUID.randomUUID().toString());
-        saltStaffEntity.setStaffDescChi(saltTeamForm.getStaffDescChi());
-        saltStaffEntity.setStaffDescEn(saltTeamForm.getStaffDescEn());
-        saltStaffEntity.setStaffDescJap(saltTeamForm.getStaffDescJap());
-        saltStaffEntity.setStaffDescSpa(saltTeamForm.getStaffDescSpa());
-        saltStaffEntity.setStaffNameChi(saltTeamForm.getStaffNameChi());
-        saltStaffEntity.setStaffNameEn(saltTeamForm.getStaffNameEn());
-        saltStaffEntity.setStaffNameJap(saltTeamForm.getStaffNameJap());
-        saltStaffEntity.setStaffNameSpa(saltTeamForm.getStaffNameSpa());
-        saltStaffEntity.setStaffPostChi(saltTeamForm.getStaffPostChi());
-        saltStaffEntity.setStaffPostEn(saltTeamForm.getStaffPostEn());
-        saltStaffEntity.setStaffPostJap(saltTeamForm.getStaffPostJap());
-        saltStaffEntity.setStaffPostSpa(saltTeamForm.getStaffPostSpa());
         saltStaffDao.insert(saltStaffEntity);
-        return R.ok("成功");
+        return new CreatedVO("添加成功");
     }
 
     @Override
-    public R modifyStaff(SaltTeamForm saltTeamForm) {
+    public UpdatedVO modifyStaff(SaltTeamForm saltTeamForm) {
         SaltStaffEntity saltStaffEntity = new SaltStaffEntity();
-        saltStaffEntity.setId(saltTeamForm.getId());
-        saltStaffEntity.setStaffDescChi(saltTeamForm.getStaffDescChi());
-        saltStaffEntity.setStaffDescEn(saltTeamForm.getStaffDescEn());
-        saltStaffEntity.setStaffDescJap(saltTeamForm.getStaffDescJap());
-        saltStaffEntity.setStaffDescSpa(saltTeamForm.getStaffDescSpa());
-        saltStaffEntity.setStaffNameChi(saltTeamForm.getStaffNameChi());
-        saltStaffEntity.setStaffNameEn(saltTeamForm.getStaffNameEn());
-        saltStaffEntity.setStaffNameJap(saltTeamForm.getStaffNameJap());
-        saltStaffEntity.setStaffNameSpa(saltTeamForm.getStaffNameSpa());
-        saltStaffEntity.setStaffPostChi(saltTeamForm.getStaffPostChi());
-        saltStaffEntity.setStaffPostEn(saltTeamForm.getStaffPostEn());
-        saltStaffEntity.setStaffPostJap(saltTeamForm.getStaffPostJap());
-        saltStaffEntity.setStaffPostSpa(saltTeamForm.getStaffPostSpa());
+        BeanUtils.copyProperties(saltTeamForm,saltStaffEntity);
         saltStaffDao.updateById(saltStaffEntity);
-        return null;
+        return new UpdatedVO("已更新");
     }
 
     @Override
-    public R deleteStaff(String id) {
+    public DeletedVO deleteStaff(String id) {
         saltStaffDao.deleteById(id);
-        return null;
+        return new DeletedVO("已删除");
     }
 }
