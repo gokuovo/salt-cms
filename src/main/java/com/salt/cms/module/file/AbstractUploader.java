@@ -161,9 +161,9 @@ public abstract class AbstractUploader implements Uploader {
         // 写到了本地
         String ext = FileUtil.getFileExt(originName);
         // 检测扩展
-        if (!this.checkExt(include, exclude, ext)) {
-            throw new FileExtensionException(ext + "文件类型不支持");
-        }
+//        if (!this.checkExt(include, exclude, ext)) {
+//            throw new FileExtensionException(ext + "文件类型不支持");
+//        }
         // 检测单个大小
         if (length > singleFileLimit) {
             throw new FileTooLargeException(originName + "文件不能超过" + singleFileLimit);

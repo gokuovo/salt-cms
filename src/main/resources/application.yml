@@ -13,6 +13,10 @@ spring:
     resources:
       # 关闭默认静态资源的映射规则
       add-mappings: false
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
 
 mybatis-plus:
   configuration:
@@ -28,7 +32,7 @@ mybatis-plus:
       logic-delete-value: NOW()
       logic-not-delete-value: 'NULL'
   # mapper路径位置
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath*:mapper/*.xml,classpath*:**/dao/*.xml
 
 
 lin:

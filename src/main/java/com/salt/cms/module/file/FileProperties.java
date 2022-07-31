@@ -19,7 +19,7 @@ public class FileProperties {
 
     private String storeDir = "/assets";
 
-    private String singleLimit = "2MB";
+    private String singleLimit = "500MB";
 
     private Integer nums = 10;
 

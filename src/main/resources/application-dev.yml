@@ -23,7 +23,7 @@ mybatis-plus:
 
 # 开启权限拦截
 auth:
-  enabled: true
+  enabled: false
 
 # 开启登录要求验证码
 login-captcha:

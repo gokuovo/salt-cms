@@ -16,7 +16,7 @@ lin:
     # 服务器文件路径
     serve-path: assets/**
     # 单个文件最大体积
-    single-limit: 2MB
+    single-limit: 500MB
     # 本地文件保存位置
     store-dir: assets/
 spring:
