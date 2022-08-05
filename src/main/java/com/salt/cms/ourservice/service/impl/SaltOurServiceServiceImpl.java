@@ -126,7 +126,8 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
         qw.eq("video_type",videoType);
         SaltVideoEntity saltVideoEntity = new SaltVideoEntity();
         saltVideoEntity = saltVideoDao.selectOne(qw);
-        return saltVideoEntity.getVideoUrl();
+        String url = (null == saltVideoEntity) ? "" : saltVideoEntity.getVideoUrl();
+        return url;
     }
 
     @Override
