@@ -30,7 +30,7 @@ public class SaltPartersController {
     }
 
     @PostMapping("/addPartners")
-    public CreatedVO addMenu(@RequestBody SaltPartnersForm partnersForm){
+    public SaltPartnerEntity addMenu(@RequestBody SaltPartnersForm partnersForm){
         return partnersService.addPartners(partnersForm);
     }
 

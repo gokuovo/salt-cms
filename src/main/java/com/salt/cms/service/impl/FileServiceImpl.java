@@ -95,6 +95,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileDO> implements 
                     }
 
                     res.add(transformDoToBo(fileDO, file.getKey()));
+                    log.info("上传成功");
                 }catch (Exception e){
                     log.info("插入图片失败");
                 }

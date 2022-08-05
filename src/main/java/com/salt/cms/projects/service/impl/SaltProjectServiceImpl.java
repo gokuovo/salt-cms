@@ -42,6 +42,14 @@ public class SaltProjectServiceImpl implements SaltProjectService {
     }
 
     @Override
+    public List<SaltMusicVideoEntity> getProjectByType(String type) {
+        QueryWrapper<SaltMusicVideoEntity> qw = new QueryWrapper<>();
+        qw.eq("type",type);
+        List<SaltMusicVideoEntity> list = saltMusicVideoDao.selectList(qw);
+        return list;
+    }
+
+    @Override
     public List<SaltAlbumEntity> getAlbum() {
         return saltAlbumDao.getAlbum();
     }
@@ -52,12 +60,12 @@ public class SaltProjectServiceImpl implements SaltProjectService {
     }
 
     @Override
-    public CreatedVO addAlbum(SaltAlbumEntity saltAlbumEntity) {
+    public SaltAlbumEntity addAlbum(SaltAlbumEntity saltAlbumEntity) {
         SaltAlbumEntity saltAlbum = new SaltAlbumEntity();
         BeanUtils.copyProperties(saltAlbumEntity,saltAlbum);
         saltAlbum.setId(UUID.randomUUID().toString());
         saltAlbumDao.insert(saltAlbum);
-        return new CreatedVO("添加成功");
+        return saltAlbum;
     }
 
     @Override
@@ -108,12 +116,12 @@ public class SaltProjectServiceImpl implements SaltProjectService {
     }
 
     @Override
-    public CreatedVO addList(SaltListForm saltListForm) {
+    public SaltListEntity addList(SaltListForm saltListForm) {
         SaltListEntity saltListEntity = new SaltListEntity();
         BeanUtils.copyProperties(saltListForm,saltListEntity);
         saltListEntity.setId(UUID.randomUUID().toString());
         saltListDao.insert(saltListEntity);
-        return new CreatedVO("成功");
+        return saltListEntity;
     }
 
     @Override
@@ -128,5 +136,50 @@ public class SaltProjectServiceImpl implements SaltProjectService {
     public DeletedVO deleteList(String id) {
         saltListDao.deleteById(id);
         return new DeletedVO("成功");
+    }
+
+    @Override
+    public SaltMusicVideoEntity getMusicOne(String id) {
+        return saltMusicVideoDao.selectById(id);
+    }
+
+    @Override
+    public DeletedVO deleteMusic(String id) {
+        saltMusicVideoDao.deleteById(id);
+        return new DeletedVO("删除完成");
+    }
+
+    @Override
+    public SaltMusicVideoEntity addMusic(SaltMusicVideoEntity saltMusicVideoEntity) {
+        saltMusicVideoEntity.setId(UUID.randomUUID().toString());
+        saltMusicVideoEntity.setType("0");
+        saltMusicVideoDao.insert(saltMusicVideoEntity);
+        return saltMusicVideoEntity;
+    }
+
+    @Override
+    public UpdatedVO modifyMusic(SaltMusicVideoEntity saltMusicVideoEntity) {
+        saltMusicVideoDao.updateById(saltMusicVideoEntity);
+        return new UpdatedVO("更新完成");
+    }
+
+    @Override
+    public DeletedVO deleteVideo(String id) {
+        saltMusicVideoDao.deleteById(id);
+        return new DeletedVO("删除完成");
+    }
+
+    @Override
+    public SaltMusicVideoEntity addVideo(SaltMusicVideoEntity saltMusicVideoEntity) {
+        saltMusicVideoEntity.setId(UUID.randomUUID().toString());
+        saltMusicVideoEntity.setType("1");
+        saltMusicVideoDao.insert(saltMusicVideoEntity);
+        return saltMusicVideoEntity;
+    }
+
+    @Override
+    public UpdatedVO modifyVideo(SaltMusicVideoEntity saltMusicVideoEntity) {
+        saltMusicVideoDao.updateById(saltMusicVideoEntity);
+        return new UpdatedVO("更新完成");
     }
 }

@@ -46,7 +46,7 @@ public class SaltNewsController {
     }
 
     @PostMapping("/addNews")
-    public CreatedVO addNews(@RequestBody SaltNewsForm saltNewsForm){
+    public SaltNewsEntity addNews(@RequestBody SaltNewsForm saltNewsForm){
         return saltNewsService.addNews(saltNewsForm);
     }
 
@@ -61,7 +61,7 @@ public class SaltNewsController {
     }
 
     @PostMapping("/addWorklog")
-    public CreatedVO addWorklog(@RequestBody SaltWorklogForm saltWorklogForm){
+    public SaltWorklogEntity addWorklog(@RequestBody SaltWorklogForm saltWorklogForm){
         return saltNewsService.addWorklog(saltWorklogForm);
     }
 

@@ -30,5 +30,5 @@ public class SaltAlbumEntity {
     private String platformJap;
     private String platformSpa;
     private String imgSrc;
-    private String sort;
+    private int sort;
 }

@@ -71,9 +71,9 @@ public class SaltContactUsController {
 
 
     @PostMapping("/addSocial")
-    public CreatedVO addSocial(@RequestBody SaltSocialForm saltSocialForm){
-        contactUsService.addSocial(saltSocialForm);
-        return new CreatedVO(12);
+    public SaltSocialEntity addSocial(@RequestBody SaltSocialForm saltSocialForm){
+
+        return contactUsService.addSocial(saltSocialForm);
     }
 
     @PostMapping("/deleteSocial")

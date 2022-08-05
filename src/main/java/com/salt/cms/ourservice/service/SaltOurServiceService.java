@@ -19,6 +19,7 @@ public interface SaltOurServiceService {
     SaltWordEntity getWordId(String id);
     R modifyWord(SaltWordForm saltWordForm);
     List<SaltVideoEntity> getVideoList();
+    SaltVideoEntity getVideoOne(String id);
     R addVideo(SaltVideoForm saltVideoForm);
     R modifyVideo(SaltVideoForm saltVideoForm);
     R deleteVideo(String id);

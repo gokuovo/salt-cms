@@ -8,7 +8,6 @@ import com.salt.cms.news.dao.SaltWorklogDao;
 import com.salt.cms.news.form.SaltNewsForm;
 import com.salt.cms.news.form.SaltWorklogForm;
 import com.salt.cms.news.service.SaltNewsService;
-import com.salt.cms.utils.R;
 import com.salt.cms.vo.CreatedVO;
 import com.salt.cms.vo.DeletedVO;
 import com.salt.cms.vo.UpdatedVO;
@@ -49,12 +48,12 @@ public class SaltNewsServiceImpl implements SaltNewsService {
     }
 
     @Override
-    public CreatedVO addNews(SaltNewsForm saltNewsForm) {
+    public SaltNewsEntity addNews(SaltNewsForm saltNewsForm) {
         SaltNewsEntity saltNewsEntity = new SaltNewsEntity();
         BeanUtils.copyProperties(saltNewsForm,saltNewsEntity);
         saltNewsEntity.setId(UUID.randomUUID().toString());
         saltNewsDao.insert(saltNewsEntity);
-        return new CreatedVO("添加成功");
+        return saltNewsEntity;
     }
 
     @Override
@@ -72,12 +71,12 @@ public class SaltNewsServiceImpl implements SaltNewsService {
     }
 
     @Override
-    public CreatedVO addWorklog(SaltWorklogForm saltWorklogForm) {
+    public SaltWorklogEntity addWorklog(SaltWorklogForm saltWorklogForm) {
         SaltWorklogEntity saltWorklogEntity = new SaltWorklogEntity();
         BeanUtils.copyProperties(saltWorklogForm,saltWorklogEntity);
         saltWorklogEntity.setId(UUID.randomUUID().toString());
         saltWorklogDao.insert(saltWorklogEntity);
-        return new CreatedVO("成功");
+        return saltWorklogEntity;
     }
 
     @Override

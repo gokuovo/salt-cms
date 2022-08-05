@@ -28,4 +28,6 @@ public class FileBO {
      * 文件 URL
      */
     private String url;
+
+    private String relativeId;
 }

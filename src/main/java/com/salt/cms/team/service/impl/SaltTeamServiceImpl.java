@@ -4,7 +4,6 @@ import com.salt.cms.entity.SaltStaffEntity;
 import com.salt.cms.team.dao.SaltStaffDao;
 import com.salt.cms.team.form.SaltTeamForm;
 import com.salt.cms.team.service.SaltTeamService;
-import com.salt.cms.utils.R;
 import com.salt.cms.vo.CreatedVO;
 import com.salt.cms.vo.DeletedVO;
 import com.salt.cms.vo.UpdatedVO;
@@ -40,12 +39,12 @@ public class SaltTeamServiceImpl implements SaltTeamService {
     }
 
     @Override
-    public CreatedVO addStaff(SaltTeamForm saltTeamForm) {
+    public SaltStaffEntity addStaff(SaltTeamForm saltTeamForm) {
         SaltStaffEntity saltStaffEntity = new SaltStaffEntity();
         BeanUtils.copyProperties(saltTeamForm,saltStaffEntity);
         saltStaffEntity.setId(UUID.randomUUID().toString());
         saltStaffDao.insert(saltStaffEntity);
-        return new CreatedVO("添加成功");
+        return saltStaffEntity;
     }
 
     @Override

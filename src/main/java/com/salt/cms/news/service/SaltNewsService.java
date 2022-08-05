@@ -4,7 +4,6 @@ import com.salt.cms.entity.SaltNewsEntity;
 import com.salt.cms.entity.SaltWorklogEntity;
 import com.salt.cms.news.form.SaltNewsForm;
 import com.salt.cms.news.form.SaltWorklogForm;
-import com.salt.cms.vo.CreatedVO;
 import com.salt.cms.vo.DeletedVO;
 import com.salt.cms.vo.UpdatedVO;
 
@@ -17,12 +16,12 @@ public interface SaltNewsService {
     SaltNewsEntity getNewsOne(String id);
     SaltWorklogEntity getWorklogOne(String id);
 
-    CreatedVO addNews(SaltNewsForm saltNewsForm);
+    SaltNewsEntity addNews(SaltNewsForm saltNewsForm);
     DeletedVO deleteNews(String id);
     UpdatedVO modifyNews(SaltNewsForm saltNewsForm);
 
 
-    CreatedVO addWorklog(SaltWorklogForm saltWorklogForm);
+    SaltWorklogEntity addWorklog(SaltWorklogForm saltWorklogForm);
     DeletedVO deleteWorklog(String id);
     UpdatedVO modifyWorklog(SaltWorklogForm saltWorklogForm);
 

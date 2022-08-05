@@ -8,4 +8,5 @@ public class SaltSocialForm {
     private String connectType;
     private String imageUrl;
     private String contactUrl;
+    private int sort;
 }

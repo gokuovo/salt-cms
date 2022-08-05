@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 
@@ -48,7 +49,7 @@ public class SaltProjectController {
     }
 
     @PostMapping("/addAlbum")
-    public CreatedVO addAlbum(@RequestBody SaltAlbumEntity saltAlbumEntity){
+    public SaltAlbumEntity addAlbum(@RequestBody SaltAlbumEntity saltAlbumEntity){
         return saltProjectService.addAlbum(saltAlbumEntity);
     }
 
@@ -82,6 +83,20 @@ public class SaltProjectController {
         return R.ok().put("list",saltProjectService.getProject(album));
     }
 
+    //根据type获取媒体
+    @GetMapping("/getProjectByType")
+    public List<SaltMusicVideoEntity> getProjectByType(@RequestParam("type") String type){
+        log.info("开始获取project媒体信息");
+        return saltProjectService.getProjectByType(type);
+    }
+
+    //cms
+    @GetMapping("/getProjecteByAlbum")
+    public List<SaltMusicVideoEntity> getProjecteByAlbum(@RequestParam("album")String album){
+        log.info("开始获取project媒体信息");
+        return saltProjectService.getProject(album);
+    }
+
     @GetMapping("/getAlbumPage")
     public R getAlbumPage(){
         log.info("开始获取专辑信息");
@@ -94,26 +109,14 @@ public class SaltProjectController {
         return R.ok().put("list",saltProjectService.getList());
     }
 
-
-    @PostMapping("/addFile")
-    public R addFile(@RequestBody SaltMusicVideoForm saltMusicVideoForm){
-        return saltProjectService.addFile(saltMusicVideoForm);
+    @GetMapping("/getMusicOne")
+    public SaltMusicVideoEntity getMusicOne(@RequestParam("id")String id){
+        log.info("开始获取专辑信息");
+        return saltProjectService.getMusicOne(id);
     }
-
-    @PostMapping("/modifyFile")
-    public R amodifyFile(@RequestBody SaltMusicVideoForm saltMusicVideoForm){
-        return saltProjectService.modifyFile(saltMusicVideoForm);
-    }
-
-    @PostMapping("/deleteFile")
-    public R deleteFile(@RequestBody String id){
-        return saltProjectService.deleteFile(id);
-    }
-
-
 
     @PostMapping("/addList")
-    public CreatedVO addList(@RequestBody SaltListForm saltListForm){
+    public SaltListEntity addList(@RequestBody SaltListForm saltListForm){
         return saltProjectService.addList(saltListForm);
     }
 
@@ -126,6 +129,40 @@ public class SaltProjectController {
     public DeletedVO deleteList(@RequestParam("id") String id){
         return saltProjectService.deleteList(id);
     }
+
+
+
+    @PostMapping("deleteMusic")
+    public DeletedVO deleteMusic(@RequestParam("id") String id){
+        return saltProjectService.deleteMusic(id);
+    }
+
+    @PostMapping("/addMusic")
+    public SaltMusicVideoEntity addMusic(@RequestBody SaltMusicVideoEntity saltMusicVideoEntity){
+        return saltProjectService.addMusic(saltMusicVideoEntity);
+    }
+
+    @PostMapping("modifyMusic")
+    public UpdatedVO modifyMusic(@RequestBody SaltMusicVideoEntity saltMusicVideoEntity){
+        return saltProjectService.modifyMusic(saltMusicVideoEntity);
+    }
+
+    @PostMapping("deleteVideo")
+    public DeletedVO deleteVideo(@RequestParam("id") String id){
+        return saltProjectService.deleteVideo(id);
+    }
+
+    @PostMapping("/addVideo")
+    public SaltMusicVideoEntity addVideo(@RequestBody SaltMusicVideoEntity saltMusicVideoEntity){
+        return saltProjectService.addVideo(saltMusicVideoEntity);
+    }
+
+    @PostMapping("modifyVideo")
+    public UpdatedVO modifyVideo(@RequestBody SaltMusicVideoEntity saltMusicVideoEntity){
+        return saltProjectService.modifyVideo(saltMusicVideoEntity);
+    }
+
+
 
 
 }

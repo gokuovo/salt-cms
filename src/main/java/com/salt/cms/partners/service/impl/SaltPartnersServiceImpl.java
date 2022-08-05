@@ -4,7 +4,6 @@ import com.salt.cms.entity.SaltPartnerEntity;
 import com.salt.cms.partners.dao.SaltPartnersDao;
 import com.salt.cms.partners.form.SaltPartnersForm;
 import com.salt.cms.partners.service.SaltPartnersService;
-import com.salt.cms.utils.R;
 import com.salt.cms.vo.CreatedVO;
 import com.salt.cms.vo.DeletedVO;
 import com.salt.cms.vo.UpdatedVO;
@@ -33,7 +32,7 @@ public class SaltPartnersServiceImpl implements SaltPartnersService {
     }
 
     @Override
-    public CreatedVO addPartners(SaltPartnersForm partnersForm) {
+    public SaltPartnerEntity addPartners(SaltPartnersForm partnersForm) {
         SaltPartnerEntity partnerEntity = new SaltPartnerEntity();
         partnerEntity.setId(partnersForm.getId());
         partnerEntity.setPartnerName(partnersForm.getPartnerName());
@@ -41,7 +40,7 @@ public class SaltPartnersServiceImpl implements SaltPartnersService {
         partnerEntity.setPartnerLink(partnersForm.getPartnerLink());
         partnerEntity.setSort(partnersForm.getSort());
         saltPartnersDao.insert(partnerEntity);
-        return new CreatedVO("添加成功");
+        return partnerEntity;
     }
 
     @Override

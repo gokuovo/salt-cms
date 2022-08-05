@@ -6,9 +6,11 @@ import com.salt.cms.entity.SaltMusicVideoEntity;
 import com.salt.cms.projects.form.SaltListForm;
 import com.salt.cms.projects.form.SaltMusicVideoForm;
 import com.salt.cms.utils.R;
-import com.salt.cms.vo.CreatedVO;
 import com.salt.cms.vo.DeletedVO;
 import com.salt.cms.vo.UpdatedVO;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -16,9 +18,10 @@ public interface SaltProjectService {
 
     List<SaltMusicVideoEntity> getProject(String album);
 
+    List<SaltMusicVideoEntity> getProjectByType(String type);
     List<SaltAlbumEntity> getAlbum();
     SaltAlbumEntity getAlbumOne(String id);
-    CreatedVO addAlbum(SaltAlbumEntity saltAlbumEntity);
+    SaltAlbumEntity addAlbum(SaltAlbumEntity saltAlbumEntity);
     UpdatedVO modifyAlbum(SaltAlbumEntity saltAlbumEntity);
     DeletedVO deleteAlbum(String id);
 
@@ -31,7 +34,16 @@ public interface SaltProjectService {
 
     R deleteFile(String id);
 
-    CreatedVO addList(SaltListForm saltListForm);
+    SaltListEntity addList(SaltListForm saltListForm);
     UpdatedVO modifyList(SaltListForm saltListForm);
     DeletedVO deleteList(String id);
+
+    SaltMusicVideoEntity getMusicOne(String id);
+    DeletedVO deleteMusic(String id);
+    SaltMusicVideoEntity addMusic(SaltMusicVideoEntity saltMusicVideoEntity);
+    UpdatedVO modifyMusic(SaltMusicVideoEntity saltMusicVideoEntity);
+
+    DeletedVO deleteVideo(String id);
+    SaltMusicVideoEntity addVideo(SaltMusicVideoEntity saltMusicVideoEntity);
+    UpdatedVO modifyVideo(SaltMusicVideoEntity saltMusicVideoEntity);
 }

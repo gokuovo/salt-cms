@@ -112,7 +112,12 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
 
     @Override
     public List<SaltVideoEntity> getVideoList() {
-        return null;
+        return saltVideoDao.getVideoList();
+    }
+
+    @Override
+    public SaltVideoEntity getVideoOne(String id) {
+        return saltVideoDao.selectById(id);
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.salt.cms.extension.file;
 
+import com.salt.cms.file.FileLocalUploader;
+import com.salt.cms.file.FileUploader;
+import com.salt.cms.module.file.File;
 import com.salt.cms.module.file.Uploader;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -22,5 +25,12 @@ public class UploaderConfiguration {
     @ConditionalOnMissingBean
     public Uploader uploader(){
         return new LocalUploader();
+    }
+
+    @Bean
+    @Order
+    @ConditionalOnMissingBean
+    public FileUploader fileUploader(){
+        return new FileLocalUploader();
     }
 }

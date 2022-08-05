@@ -1,6 +1,5 @@
 package com.salt.cms.contactus.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.salt.cms.contactus.dao.SaltContactUsDao;
 import com.salt.cms.contactus.dao.SaltSocialDao;
 import com.salt.cms.contactus.form.SaltContactForm;
@@ -13,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.UUID;
@@ -74,14 +72,12 @@ public class SaltContactUsServiceImpl implements SaltContactUsService {
     }
 
     @Override
-    public R addSocial(SaltSocialForm saltSocialForm) {
+    public SaltSocialEntity addSocial(SaltSocialForm saltSocialForm) {
         SaltSocialEntity saltSocialEntity = new SaltSocialEntity();
+        BeanUtils.copyProperties(saltSocialForm,saltSocialEntity);
         saltSocialEntity.setId(UUID.randomUUID().toString());
-        saltSocialEntity.setConnectType(saltSocialForm.getConnectType());
-        saltSocialEntity.setContactUrl(saltSocialForm.getContactUrl());
-        saltSocialEntity.setImageUrl(saltSocialForm.getImageUrl());
         saltSocialDao.insert(saltSocialEntity);
-        return R.ok("完成");
+        return saltSocialEntity;
     }
 
     @Override
@@ -93,10 +89,7 @@ public class SaltContactUsServiceImpl implements SaltContactUsService {
     @Override
     public R modifySocial(SaltSocialForm saltSocialForm) {
         SaltSocialEntity saltSocialEntity = new SaltSocialEntity();
-        saltSocialEntity.setId(saltSocialForm.getId());
-        saltSocialEntity.setConnectType(saltSocialForm.getConnectType());
-        saltSocialEntity.setContactUrl(saltSocialForm.getContactUrl());
-        saltSocialEntity.setImageUrl(saltSocialForm.getImageUrl());
+        BeanUtils.copyProperties(saltSocialForm,saltSocialEntity);
         saltSocialDao.updateById(saltSocialEntity);
         return R.ok("完成");
     }

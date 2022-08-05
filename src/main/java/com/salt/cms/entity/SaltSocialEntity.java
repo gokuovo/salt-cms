@@ -12,6 +12,6 @@ public class SaltSocialEntity {
     private String connectType;
     private String imageUrl;
     private String contactUrl;
-    private String sort;
+    private int sort;
     private String isValid;
 }

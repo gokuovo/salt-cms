@@ -31,7 +31,8 @@ public class FileController {
      */
     @PostMapping
     @LoginRequired
-    public List<FileBO> upload(MultipartHttpServletRequest multipartHttpServletRequest, @RequestParam("imageType") String imageType) {
+    public List<FileBO> upload(MultipartHttpServletRequest multipartHttpServletRequest, @RequestParam(value = "imageType",required = false) String imageType,
+                               @RequestParam(value = "fileType",required = false)String fileType) {
         MultiValueMap<String, MultipartFile> fileMap =
                 multipartHttpServletRequest.getMultiFileMap();
         return fileService.upload(fileMap,imageType);

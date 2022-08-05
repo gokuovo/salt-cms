@@ -45,7 +45,7 @@ public class SaltTeamController {
     }
 
     @PostMapping("/addStaff")
-    public CreatedVO addStaff(@RequestBody SaltTeamForm staffForm){
+    public SaltStaffEntity addStaff(@RequestBody SaltTeamForm staffForm){
         return saltTeamervice.addStaff(staffForm);
     }
 
@@ -57,6 +57,6 @@ public class SaltTeamController {
     @PostMapping("/deleteStaff")
     public DeletedVO deleteStaff(@RequestParam("id") String id){
         saltTeamervice.deleteStaff(id);
-        return new DeletedVO(14);
+        return new DeletedVO("删除成功");
     }
 }
