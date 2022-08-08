@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,6 +157,18 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
     @Override
     public SaltWordEntity getWordEntity(String id) {
         return saltWordDao.selectById(id);
+    }
+
+    @Override
+    public List<SaltImagesEntity> getRotationByType(String type) {
+        if (StringUtils.isEmpty(type)){
+            return getRotationList();
+        }else{
+            QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
+            qw.eq("image_code",type);
+            return saltImagesDao.selectList(qw);
+        }
+
     }
 
 }

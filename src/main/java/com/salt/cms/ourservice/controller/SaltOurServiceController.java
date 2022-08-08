@@ -50,6 +50,11 @@ public class SaltOurServiceController {
         return ourService.getRotationList();
     }
 
+    @GetMapping("/getRotationByType")
+    public List<SaltImagesEntity> getRotationByType(@RequestParam(value = "type",required = false)String type){
+        return ourService.getRotationByType(type);
+    }
+
     //获得文字段详细信息 cms已对接
     @GetMapping("/getWordOne")
     public SaltWordEntity getWordEntity(@RequestParam("id") String id){
