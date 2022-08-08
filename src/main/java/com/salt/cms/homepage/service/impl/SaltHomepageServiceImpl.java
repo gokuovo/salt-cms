@@ -45,6 +45,7 @@ public class SaltHomepageServiceImpl extends ServiceImpl<SaltImagesDao,SaltImage
         list.add("08");
         list.add("09");
         list.add("10");
+        list.add("16");
         qw.in("image_code",list);
         List<SaltImagesEntity> saltImagesEntities = saltImagesDao.getBackground(qw);
         return saltImagesEntities;
