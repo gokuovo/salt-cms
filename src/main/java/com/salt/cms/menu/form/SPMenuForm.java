@@ -10,5 +10,5 @@ public class SPMenuForm {
     private String menuNameJap;
     private String menuNameSpa;
     private String url;
-    private int sort;
+    private String sort;
 }

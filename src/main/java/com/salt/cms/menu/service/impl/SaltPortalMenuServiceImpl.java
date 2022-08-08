@@ -59,9 +59,6 @@ public class SaltPortalMenuServiceImpl implements SaltPortalMenuService {
         if (ObjectUtils.isEmpty(spMenuForm.getSort())){
             return R.error("排序不能为空！");
         }
-        if (!Character.isDigit(spMenuForm.getSort())){
-            return R.error("请输入数字");
-        }
         SaltPortalMenuEntity saltPortalMenuEntity = new SaltPortalMenuEntity();
         saltPortalMenuEntity.setId(UUID.randomUUID().toString());
         saltPortalMenuEntity.setMenuNameEn(spMenuForm.getMenuNameEn());

@@ -19,7 +19,7 @@ public interface FileService extends IService<FileDO> {
      * @param fileMap 文件map
      * @return 文件数据
      */
-    List<FileBO> upload(MultiValueMap<String, MultipartFile> fileMap,String imagetType);
+    List<FileBO> upload(MultiValueMap<String, MultipartFile> fileMap,String imageType);
 
     /**
      * 通过md5检查文件是否存在
