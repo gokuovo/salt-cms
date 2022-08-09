@@ -31,4 +31,5 @@ public class SaltAlbumEntity {
     private String platformSpa;
     private String imgSrc;
     private String sort;
+    private String type;//0音乐1视频
 }

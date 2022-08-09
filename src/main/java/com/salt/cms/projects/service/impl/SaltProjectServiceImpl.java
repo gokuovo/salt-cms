@@ -18,6 +18,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.FormatFlagsConversionMismatchException;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,12 +53,28 @@ public class SaltProjectServiceImpl implements SaltProjectService {
 
     @Override
     public List<SaltAlbumEntity> getAlbum() {
-        return saltAlbumDao.getAlbum();
+        List<SaltAlbumEntity> albumEntities = saltAlbumDao.getAlbum();
+        List<SaltAlbumEntity> albumEntityList = new ArrayList<>();
+        for (SaltAlbumEntity albumEntity : albumEntities){
+            if ("0".equals(albumEntity.getType())){
+                albumEntity.setType("音乐专辑");
+            }else if ("1".equals(albumEntity.getType())){
+                albumEntity.setType("视频专辑");
+            }
+            albumEntityList.add(albumEntity);
+        }
+        return albumEntityList;
     }
 
     @Override
     public SaltAlbumEntity getAlbumOne(String id) {
-        return saltAlbumDao.selectById(id);
+        SaltAlbumEntity saltAlbumEntity = saltAlbumDao.selectById(id);
+        if ("0".equals(saltAlbumEntity.getType())){
+            saltAlbumEntity.setType("音乐专辑");
+        }else if ("1".equals(saltAlbumEntity.getType())){
+            saltAlbumEntity.setType("视频专辑");
+        }
+        return saltAlbumEntity;
     }
 
     @Override
