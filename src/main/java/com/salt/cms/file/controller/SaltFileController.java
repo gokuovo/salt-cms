@@ -13,28 +13,46 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/partnersFile")
 public class SaltFileController {
-        @Autowired
-        private SaltFileService saltFileService;
+    @Autowired
+    private SaltFileService saltFileService;
 
-        /**
-         * 文件上传
-         *
-         * @param multipartHttpServletRequest 携带文件的 request
-         * @return 文件信息
-         */
-        @PostMapping
-        @LoginRequired
-        public List<FileBO> upload(MultipartHttpServletRequest multipartHttpServletRequest, @RequestParam("fileType") String fileType,
-                                   @RequestParam("id") String id) {
-            MultiValueMap<String, MultipartFile> fileMap =
-                    multipartHttpServletRequest.getMultiFileMap();
-            return saltFileService.upload(fileMap,fileType,id);
-        }
+    /**
+     * 文件上传
+     *
+     * @param multipartHttpServletRequest 携带文件的 request
+     * @return 文件信息
+     */
+    @PostMapping
+    @LoginRequired
+    public List<FileBO> upload(MultipartHttpServletRequest multipartHttpServletRequest, @RequestParam("fileType") String fileType,
+                               @RequestParam("id") String id) {
+        MultiValueMap<String, MultipartFile> fileMap = multipartHttpServletRequest.getMultiFileMap();
+        return saltFileService.upload(fileMap, fileType, id);
+    }
+
+    /**
+     * 文件夹上传
+     *
+     * @param multipartHttpServletRequest
+     * @return 文件信息
+     */
+    @PostMapping("/files")
+    @LoginRequired
+    public List<FileBO> uploads(MultipartHttpServletRequest multipartHttpServletRequest,@RequestParam("fileType") String fileType,
+                                @RequestParam("album") String album,@RequestParam("id") String id) {
+        List<FileBO> list;
+        System.out.println(album);
+        MultiValueMap<String, MultipartFile> fileMap = multipartHttpServletRequest.getMultiFileMap();
+        saltFileService.setAlbumId(album);
+        list = saltFileService.upload(fileMap, fileType, id);
+        return list;
+    }
 
 }

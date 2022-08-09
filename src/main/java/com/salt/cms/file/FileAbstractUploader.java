@@ -76,7 +76,7 @@ public abstract class FileAbstractUploader implements FileUploader {
             res.add(fileData);
             // 上传到本地或云上成功之后，调用afterHandle
             if (uploadHandler != null) {
-                uploadHandler.afterHandle(fileData,fileType,id);
+                uploadHandler.afterHandle(fileData,fileType,id,file.getOriginalFilename().split("/")[1]);
             }
         }
     }

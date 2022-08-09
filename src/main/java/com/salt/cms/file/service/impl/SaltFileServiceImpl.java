@@ -81,6 +81,11 @@ public class SaltFileServiceImpl extends ServiceImpl<FileMapper, FileDO> impleme
 
     @Autowired
     private SaltMusicVideoDao saltMusicVideoDao;
+
+    @Autowired
+    private SaltFileService saltFileService;
+
+    private String albumId;
     /**
      * 为什么不做批量插入
      * 1. 文件上传的数量一般不多，3个左右
@@ -111,7 +116,7 @@ public class SaltFileServiceImpl extends ServiceImpl<FileMapper, FileDO> impleme
 
             @Override
             @Transactional
-            public void afterHandle(File file, String fileType, String id) {
+            public void afterHandle(File file, String fileType, String id,String originalName) {
                 // 保存到数据库, 修复issue131：https://github.com/TaleLin/lin-cms-spring-boot/issues/131
                 try{
                     FileDO fileDO = new FileDO();
@@ -241,8 +246,15 @@ public class SaltFileServiceImpl extends ServiceImpl<FileMapper, FileDO> impleme
                             saltMusicVideoEntity.setUrl(path(file.getPath()));
                             saltMusicVideoDao.updateById(saltMusicVideoEntity);
                         }
+                    }else if (fileType.startsWith("musics")){
+                        SaltMusicVideoEntity saltMusicVideoEntity = new SaltMusicVideoEntity();
+                        saltMusicVideoEntity.setId(UUID.randomUUID().toString());
+                        saltMusicVideoEntity.setTitle(originalName);
+                        saltMusicVideoEntity.setUrl(path(file.getPath()));
+                        saltMusicVideoEntity.setAlbum(albumId);
+                        saltMusicVideoEntity.setType("0");
+                        saltFileService.insertMusic(saltMusicVideoEntity);
                     }
-
                     res.add(transformDoToBo(fileDO, file.getKey(),relativeId));
                     log.info("上传成功");
                 }catch (Exception e){
@@ -255,8 +267,20 @@ public class SaltFileServiceImpl extends ServiceImpl<FileMapper, FileDO> impleme
     }
 
     @Override
+    @Transactional
+    public void insertMusic(SaltMusicVideoEntity saltMusicVideoEntity ){
+        Integer nums = saltMusicVideoDao.insert(saltMusicVideoEntity);
+        System.out.println(nums);
+    }
+
+    @Override
     public boolean checkFileExistByMd5(String md5) {
         return this.getBaseMapper().selectCountByMd5(md5) > 0;
+    }
+
+    @Override
+    public void setAlbumId(String albumId) {
+        this.albumId = albumId;
     }
 
     private FileBO transformDoToBo(FileDO file, String key,String relativeId) {

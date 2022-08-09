@@ -2,6 +2,7 @@ package com.salt.cms.file.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.salt.cms.bo.FileBO;
+import com.salt.cms.entity.SaltMusicVideoEntity;
 import com.salt.cms.model.FileDO;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,4 +31,8 @@ public interface SaltFileService extends IService<FileDO> {
      * @return true 表示已存在
      */
     boolean checkFileExistByMd5(String md5);
+
+    void setAlbumId(String albumId);
+
+    void insertMusic(SaltMusicVideoEntity saltMusicVideoEntity );
 }

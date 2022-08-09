@@ -1,5 +1,7 @@
 package com.salt.cms.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,6 +10,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class SaltMusicVideoEntity {
+    @TableId(value = "id",type = IdType.INPUT)
     private String id;
     private String title;
     private String url;
