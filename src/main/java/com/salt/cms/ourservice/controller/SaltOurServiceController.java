@@ -55,6 +55,11 @@ public class SaltOurServiceController {
         return ourService.getRotationByType(type);
     }
 
+    @PostMapping("/deleteRotation")
+    public DeletedVO deleteRotation(@RequestParam("id") String id){
+        return ourService.deleteRotation(id);
+    }
+
     //获得文字段详细信息 cms已对接
     @GetMapping("/getWordOne")
     public SaltWordEntity getWordEntity(@RequestParam("id") String id){
@@ -90,7 +95,7 @@ public class SaltOurServiceController {
     }
 
     @PostMapping("/deleteVideo")
-    public R deleteVideo(@RequestBody String id){
+    public R deleteVideo(@RequestParam("id") String id){
         return ourService.deleteVideo(id);
     }
 
