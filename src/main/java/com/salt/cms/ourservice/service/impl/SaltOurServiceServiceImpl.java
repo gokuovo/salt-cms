@@ -13,6 +13,7 @@ import com.salt.cms.ourservice.form.SaltVideoForm;
 import com.salt.cms.ourservice.form.SaltWordForm;
 import com.salt.cms.ourservice.service.SaltOurServiceService;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.DeletedVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,6 +170,12 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
             return saltImagesDao.selectList(qw);
         }
 
+    }
+
+    @Override
+    public DeletedVO deleteRotation(String id) {
+        saltImagesDao.deleteById(id);
+        return new DeletedVO("删除成功");
     }
 
 }

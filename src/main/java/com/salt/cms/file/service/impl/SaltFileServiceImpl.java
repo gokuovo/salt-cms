@@ -118,6 +118,11 @@ public class SaltFileServiceImpl extends ServiceImpl<FileMapper, FileDO> impleme
                     String relativeId = null;
                     BeanUtils.copyProperties(file, fileDO);
                     getBaseMapper().insert(fileDO);
+                    List<String> list = new ArrayList<>();
+                    list.add("12");
+                    list.add("13");
+                    list.add("14");
+                    list.add("15");
                     //处理合作商配图
                     if ("partners".equals(fileType)){
                         if (StringUtils.isEmpty(id)){
@@ -240,6 +245,18 @@ public class SaltFileServiceImpl extends ServiceImpl<FileMapper, FileDO> impleme
                             saltMusicVideoEntity.setId(id);
                             saltMusicVideoEntity.setUrl(path(file.getPath()));
                             saltMusicVideoDao.updateById(saltMusicVideoEntity);
+                        }
+                    }else if (list.contains(fileType)){
+                        if (StringUtils.isEmpty(id)){
+                            SaltImagesEntity saltImagesEntity = new SaltImagesEntity();
+                            saltImagesEntity.setId(UUID.randomUUID().toString());
+                            saltImagesEntity.setImageUrl(path(file.getPath()));
+                            saltImagesDao.insert(saltImagesEntity);
+                        }else{
+                            SaltImagesEntity saltImagesEntity = new SaltImagesEntity();
+                            saltImagesEntity.setId(id);
+                            saltImagesEntity.setImageUrl(path(file.getPath()));
+                            saltImagesDao.updateById(saltImagesEntity);
                         }
                     }
 

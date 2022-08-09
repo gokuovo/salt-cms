@@ -6,6 +6,7 @@ import com.salt.cms.entity.SaltWordEntity;
 import com.salt.cms.ourservice.form.SaltVideoForm;
 import com.salt.cms.ourservice.form.SaltWordForm;
 import com.salt.cms.utils.R;
+import com.salt.cms.vo.DeletedVO;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -28,4 +29,5 @@ public interface SaltOurServiceService {
     SaltWordEntity getWordEntity(String id);
 
     List<SaltImagesEntity> getRotationByType(String type);
+    DeletedVO deleteRotation(String id);
 }
