@@ -224,4 +224,20 @@ public class SaltProjectServiceImpl implements SaltProjectService {
         }
         return list;
     }
+
+    @Override
+    public List<Map<String, String>> getAlbumMusicList() {
+        QueryWrapper<SaltAlbumEntity> qw = new QueryWrapper<>();
+        qw.eq("type","0");
+        List<SaltAlbumEntity> saltAlbumEntity = saltAlbumDao.selectList(qw);
+
+        List<Map<String, String>> list = new ArrayList<>();
+        for (SaltAlbumEntity saltAlbumEntity1 : saltAlbumEntity){
+            Map<String, String> map = new HashMap<>();
+            map.put("value",saltAlbumEntity1.getId());
+            map.put("label",saltAlbumEntity1.getTitleEn());
+            list.add(map);
+        }
+        return list;
+    }
 }

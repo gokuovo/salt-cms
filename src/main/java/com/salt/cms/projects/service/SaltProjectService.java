@@ -49,4 +49,6 @@ public interface SaltProjectService {
     UpdatedVO modifyVideo(SaltMusicVideoEntity saltMusicVideoEntity);
 
     List<Map<String,String>> getAlbumVideoList();
+
+    List<Map<String,String>> getAlbumMusicList();
 }

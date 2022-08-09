@@ -170,5 +170,10 @@ public class SaltProjectController {
     }
 
 
+    @GetMapping("/getAlbumMusicList")
+    public List<Map<String,String>> getAlbumMusicList(){
+        return saltProjectService.getAlbumMusicList();
+    }
+
 
 }
