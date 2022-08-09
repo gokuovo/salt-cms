@@ -20,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.sql.ClientInfoStatus;
 import java.util.List;
+import java.util.Map;
 
 
 @Slf4j
@@ -162,6 +164,10 @@ public class SaltProjectController {
         return saltProjectService.modifyVideo(saltMusicVideoEntity);
     }
 
+    @GetMapping("/getAlbumVideoList")
+    public List<Map<String,String>> getAlbumVideoList(){
+        return saltProjectService.getAlbumVideoList();
+    }
 
 
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SaltProjectService {
 
@@ -46,4 +47,6 @@ public interface SaltProjectService {
     DeletedVO deleteVideo(String id);
     SaltMusicVideoEntity addVideo(SaltMusicVideoEntity saltMusicVideoEntity);
     UpdatedVO modifyVideo(SaltMusicVideoEntity saltMusicVideoEntity);
+
+    List<Map<String,String>> getAlbumVideoList();
 }

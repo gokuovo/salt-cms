@@ -17,11 +17,9 @@ import com.salt.cms.vo.UpdatedVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
-import java.util.ArrayList;
-import java.util.FormatFlagsConversionMismatchException;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class SaltProjectServiceImpl implements SaltProjectService {
@@ -48,7 +46,17 @@ public class SaltProjectServiceImpl implements SaltProjectService {
         QueryWrapper<SaltMusicVideoEntity> qw = new QueryWrapper<>();
         qw.eq("type",type);
         List<SaltMusicVideoEntity> list = saltMusicVideoDao.selectList(qw);
-        return list;
+        List<SaltMusicVideoEntity> saltMusicVideoList = new ArrayList<>();
+        for (SaltMusicVideoEntity saltMusicVideoEntity:list){
+            if (!ObjectUtils.isEmpty(saltMusicVideoEntity.getAlbum())){
+                QueryWrapper<SaltAlbumEntity> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("id",saltMusicVideoEntity.getAlbum());
+                SaltAlbumEntity saltAlbumEntity = saltAlbumDao.selectOne(queryWrapper);
+                saltMusicVideoEntity.setAlbum(saltAlbumEntity.getTitleEn());
+                saltMusicVideoList.add(saltMusicVideoEntity);
+            }
+        }
+        return saltMusicVideoList;
     }
 
     @Override
@@ -199,5 +207,21 @@ public class SaltProjectServiceImpl implements SaltProjectService {
     public UpdatedVO modifyVideo(SaltMusicVideoEntity saltMusicVideoEntity) {
         saltMusicVideoDao.updateById(saltMusicVideoEntity);
         return new UpdatedVO("更新完成");
+    }
+
+    @Override
+    public List<Map<String, String>> getAlbumVideoList() {
+        QueryWrapper<SaltAlbumEntity> qw = new QueryWrapper<>();
+        qw.eq("type","1");
+        List<SaltAlbumEntity> saltAlbumEntity = saltAlbumDao.selectList(qw);
+
+        List<Map<String, String>> list = new ArrayList<>();
+        for (SaltAlbumEntity saltAlbumEntity1 : saltAlbumEntity){
+            Map<String, String> map = new HashMap<>();
+            map.put("value",saltAlbumEntity1.getId());
+            map.put("label",saltAlbumEntity1.getTitleEn());
+            list.add(map);
+        }
+        return list;
     }
 }
