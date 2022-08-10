@@ -90,7 +90,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileDO> implements 
                         SaltImagesEntity saltImagesEntity = new SaltImagesEntity();
                         saltImagesEntity.setId(UUID.randomUUID().toString());
                         saltImagesEntity.setImageCode(imageType);
-                        saltImagesEntity.setImageUrl("http://localhost:5000/assets/"+file.getPath());
+                        saltImagesEntity.setImageUrl("http://101.43.132.47:5000/assets/"+file.getPath());
                         saltImagesDao.insert(saltImagesEntity);
                     }
 

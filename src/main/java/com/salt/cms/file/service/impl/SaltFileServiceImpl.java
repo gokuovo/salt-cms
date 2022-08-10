@@ -99,12 +99,12 @@ public class SaltFileServiceImpl extends ServiceImpl<FileMapper, FileDO> impleme
         fileUploader.upload(fileMap,fileType,id ,new FileUploadHandler() {
             @Override
             public boolean preHandle(File file) {
-                FileDO found = baseMapper.selectByMd5(file.getMd5());
-                // 数据库中不存在，存储操作放在上传到本地或云上之后，
-                // 修复issue131：https://github.com/TaleLin/lin-cms-spring-boot/issues/131
-                if (found == null) {
-                    return true;
-                }
+//                FileDO found = baseMapper.selectByMd5(file.getMd5());
+//                // 数据库中不存在，存储操作放在上传到本地或云上之后，
+//                // 修复issue131：https://github.com/TaleLin/lin-cms-spring-boot/issues/131
+//                if (found == null) {
+//                    return true;
+//                }
                 // 已存在，则直接转化返回
 //                res.add(transformDoToBo(found, file.getKey()));
                 QueryWrapper<FileDO> qw = new QueryWrapper<>();
@@ -321,6 +321,6 @@ public class SaltFileServiceImpl extends ServiceImpl<FileMapper, FileDO> impleme
         return bo;
     }
     private String path(String filePath){
-        return "http://localhost:5000/assets/"+filePath;
+        return "http://101.43.132.47:5000/assets/"+filePath;
     }
 }
