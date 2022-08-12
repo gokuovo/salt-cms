@@ -2,6 +2,7 @@ package com.salt.cms.projects.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.salt.cms.entity.SaltAlbumEntity;
+import com.salt.cms.entity.SaltImagesEntity;
 import com.salt.cms.entity.SaltListEntity;
 import com.salt.cms.entity.SaltMusicVideoEntity;
 import com.salt.cms.projects.dao.SaltAlbumDao;
@@ -14,13 +15,16 @@ import com.salt.cms.utils.R;
 import com.salt.cms.vo.CreatedVO;
 import com.salt.cms.vo.DeletedVO;
 import com.salt.cms.vo.UpdatedVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
+@Slf4j
 @Service
 public class SaltProjectServiceImpl implements SaltProjectService {
 
@@ -51,6 +55,8 @@ public class SaltProjectServiceImpl implements SaltProjectService {
             if (!ObjectUtils.isEmpty(saltMusicVideoEntity.getAlbum())){
                 QueryWrapper<SaltAlbumEntity> queryWrapper = new QueryWrapper<>();
                 queryWrapper.eq("id",saltMusicVideoEntity.getAlbum());
+                log.info(saltMusicVideoEntity.getAlbum());
+                System.out.println(saltMusicVideoEntity.getAlbum());
                 SaltAlbumEntity saltAlbumEntity = saltAlbumDao.selectOne(queryWrapper);
                 saltMusicVideoEntity.setAlbum(saltAlbumEntity.getTitleEn());
                 saltMusicVideoList.add(saltMusicVideoEntity);
@@ -239,5 +245,16 @@ public class SaltProjectServiceImpl implements SaltProjectService {
             list.add(map);
         }
         return list;
+    }
+
+    @Override
+    public List<SaltMusicVideoEntity> getMusicByType(String type) {
+        if (StringUtils.isEmpty(type)){
+            return saltMusicVideoDao.getMusicList();
+        }else{
+            QueryWrapper<SaltMusicVideoEntity> qw = new QueryWrapper<>();
+            qw.eq("album",type);
+            return saltMusicVideoDao.selectList(qw);
+        }
     }
 }

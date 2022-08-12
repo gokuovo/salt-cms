@@ -51,4 +51,6 @@ public interface SaltProjectService {
     List<Map<String,String>> getAlbumVideoList();
 
     List<Map<String,String>> getAlbumMusicList();
+
+    List<SaltMusicVideoEntity> getMusicByType(String type);
 }

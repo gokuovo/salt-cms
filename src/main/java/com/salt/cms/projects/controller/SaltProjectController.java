@@ -2,6 +2,7 @@ package com.salt.cms.projects.controller;
 
 
 import com.salt.cms.entity.SaltAlbumEntity;
+import com.salt.cms.entity.SaltImagesEntity;
 import com.salt.cms.entity.SaltListEntity;
 import com.salt.cms.entity.SaltMusicVideoEntity;
 import com.salt.cms.menu.form.SPMenuForm;
@@ -175,5 +176,10 @@ public class SaltProjectController {
         return saltProjectService.getAlbumMusicList();
     }
 
+
+    @GetMapping("/getMusicByType")
+    public List<SaltMusicVideoEntity> getMusicByType(@RequestParam(value = "type",required = false)String type){
+        return saltProjectService.getMusicByType(type);
+    }
 
 }
