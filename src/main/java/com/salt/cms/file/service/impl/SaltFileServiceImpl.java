@@ -255,6 +255,7 @@ public class SaltFileServiceImpl extends ServiceImpl<FileMapper, FileDO> impleme
                         if (StringUtils.isEmpty(id)){
                             SaltImagesEntity saltImagesEntity = new SaltImagesEntity();
                             saltImagesEntity.setId(UUID.randomUUID().toString());
+                            saltImagesEntity.setImageCode(fileType);
                             saltImagesEntity.setImageUrl(path(file.getPath()));
                             saltImagesDao.insert(saltImagesEntity);
                         }else{

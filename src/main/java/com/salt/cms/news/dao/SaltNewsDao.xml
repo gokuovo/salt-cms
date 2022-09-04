@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.salt.cms.news.dao.SaltNewsDao">
+
+
+    <select id="getNewsLink" resultType="com.salt.cms.news.form.SaltNewsLinkForm">
+        select
+        id id,
+        title_en titleEn
+        from salt_news
+    </select>
+
+    <select id="getNewsLinkPage" resultType="com.salt.cms.news.form.SaltNewsLinkPageForm">
+        select
+        b.id id,
+        b.title title,
+        (SELECT date_en from salt_news a where a.id = b.id) date,
+        (SELECT image_url from salt_images where image_code = b.img01) img01,
+        (SELECT image_url from salt_images where image_code = b.img02) img02,
+        (SELECT image_url from salt_images where image_code = b.img03) img03,
+        b.img01 imgId01,
+        b.img02 imgId02,
+        b.img03 imgId03,
+        (SELECT image_url from salt_images where image_code = b.img01) img01,
+        (SELECT image_url from salt_images where image_code = b.img02) img02,
+        (SELECT image_url from salt_images where image_code = b.img03) img03,
+        b.text_en01 textEn01,
+        b.text_chi01 textChi01,
+        b.text_jap01 textJap01,
+        b.text_spa01 textSpa01,
+        b.text_en02 textEn02,
+        b.text_chi02 textChi02,
+        b.text_jap02 textJap02,
+        b.text_spa02 textSpa02
+        from salt_news_link b
+        ${ew.customSqlSegment}
+    </select>
+
+</mapper>

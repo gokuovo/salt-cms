@@ -150,6 +150,8 @@ public class UserController {
     @GetMapping("/information")
     public UserInfoVO getInformation() {
         UserDO user = LocalUser.getLocalUser();
+        String url = user.getAvatar().replace("localhost","101.43.132.47");
+        user.setAvatar(url);
         List<GroupDO> groups = groupService.getUserGroupsByUserId(user.getId());
         return new UserInfoVO(user, groups);
     }

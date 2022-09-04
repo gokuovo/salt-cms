@@ -5,12 +5,24 @@ server:
   port: 5000
 
 
+
+
+
 spring:
+  thymeleaf:
+    prefix: classpath:/static/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
   # 数据源配置，请修改为你项目的实际配置
   datasource:
-    url: jdbc:mysql://47.96.125.127:3306/salt?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+#    url: jdbc:mysql://localhost:3306/salt?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+#    username: root
+#    password: 123456
+    url: jdbc:mysql://101.43.132.47:3306/salt?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
     password: qwe123
+
     driver-class-name: com.mysql.jdbc.Driver
 
 
@@ -23,7 +35,7 @@ mybatis-plus:
 
 # 开启权限拦截
 auth:
-  enabled: false
+  enabled: true
 
 # 开启登录要求验证码
 login-captcha:
