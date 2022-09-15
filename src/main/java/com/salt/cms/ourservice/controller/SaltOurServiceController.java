@@ -39,6 +39,13 @@ public class SaltOurServiceController {
         return list;
     }
 
+    //获得文字段list cms已对接、门户
+    @GetMapping("/getArticle")
+    public List<SaltWordEntity> getArticle(){
+        List<SaltWordEntity> list = ourService.getArticle();
+        return list;
+    }
+
     //获得轮播图 cms、门户
     @GetMapping("/getRotation")
     public List<String> getRotation(@RequestParam("code")String code){

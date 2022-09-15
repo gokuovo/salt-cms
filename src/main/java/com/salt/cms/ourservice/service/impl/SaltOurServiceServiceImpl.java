@@ -44,6 +44,11 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
     }
 
     @Override
+    public List<SaltWordEntity> getArticle() {
+        return saltWordDao.getArticle();
+    }
+
+    @Override
     public List<String> getRotation(String code) {
         QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
         String image_code;

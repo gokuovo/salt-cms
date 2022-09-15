@@ -15,6 +15,7 @@ public interface SaltOurServiceService {
 
     String getVideo(String videoType);
     List<SaltWordEntity> getWord();
+    List<SaltWordEntity> getArticle();
     List<String> getRotation(String code);
     List<SaltImagesEntity> getRotationList();
     R addWord(SaltWordForm saltWordForm);

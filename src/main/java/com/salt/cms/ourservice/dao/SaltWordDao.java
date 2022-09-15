@@ -14,4 +14,5 @@ public interface SaltWordDao extends BaseMapper<SaltWordEntity> {
     SaltWordForm getWhatWeDoText();
     SaltWordForm getRotation();
     List<SaltWordEntity> getWord();
+    List<SaltWordEntity> getArticle();
 }
