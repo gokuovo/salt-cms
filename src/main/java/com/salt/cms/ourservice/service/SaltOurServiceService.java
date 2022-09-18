@@ -7,7 +7,6 @@ import com.salt.cms.ourservice.form.SaltVideoForm;
 import com.salt.cms.ourservice.form.SaltWordForm;
 import com.salt.cms.utils.R;
 import com.salt.cms.vo.DeletedVO;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public interface SaltOurServiceService {
     List<SaltImagesEntity> getRotationList();
     R addWord(SaltWordForm saltWordForm);
     SaltWordEntity getWordId(String id);
-    R modifyWord(SaltWordForm saltWordForm);
+    R modifyWord(SaltWordEntity saltWordForm);
     List<SaltVideoEntity> getVideoList();
     SaltVideoEntity getVideoOne(String id);
     R addVideo(SaltVideoForm saltVideoForm);

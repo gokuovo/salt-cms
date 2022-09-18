@@ -16,10 +16,10 @@ public interface SaltContactUsDao extends BaseMapper<SaltContactEntity> {
     @Select("select * from salt_contact")
     SaltContactForm getContact();
 
-    @Select("select * from salt_social limit 6")
+    @Select("select * from salt_social where icon_location = '0' order by sort limit 6")
     List<SaltSocialEntity> getSocialSix();
 
-    @Select("select * from salt_social limit 4")
+    @Select("select * from salt_social where icon_location = '1' order by sort limit 4")
     List<SaltSocialEntity> getSocialFour();
 
     @Select("select * from salt_social")

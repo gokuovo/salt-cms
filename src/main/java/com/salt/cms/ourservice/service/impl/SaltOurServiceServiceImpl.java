@@ -104,7 +104,7 @@ public class SaltOurServiceServiceImpl implements SaltOurServiceService {
 
 
     @Override
-    public R modifyWord(SaltWordForm saltWordForm) {
+    public R modifyWord(SaltWordEntity saltWordForm) {
         SaltWordEntity saltWordEntity = new SaltWordEntity();
         saltWordEntity.setId(saltWordForm.getId());
         saltWordEntity.setWordTextEn(saltWordForm.getWordTextEn());

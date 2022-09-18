@@ -76,7 +76,7 @@ public class SaltOurServiceController {
 
     //修改文字段 cms已对接
     @PostMapping("/modifyWord")
-    public UpdatedVO modifyWord(@RequestBody SaltWordForm saltWordForm){
+    public UpdatedVO modifyWord(@RequestBody SaltWordEntity saltWordForm){
         ourService.modifyWord(saltWordForm);
         return new UpdatedVO(13);
     }

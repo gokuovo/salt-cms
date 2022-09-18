@@ -6,13 +6,11 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.salt.cms.entity.SaltImagesEntity;
 import com.salt.cms.entity.SaltNewsEntity;
 import com.salt.cms.entity.SaltNewsLinkEntity;
-import com.salt.cms.news.form.SaltNewsForm;
-import com.salt.cms.news.form.SaltNewsLinkForm;
-import com.salt.cms.news.form.SaltNewsLinkPageForm;
-import com.salt.cms.news.form.SaltWorklogForm;
+import com.salt.cms.news.form.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -29,5 +27,5 @@ public interface SaltNewsDao extends BaseMapper<SaltNewsEntity> {
 
     List<SaltNewsLinkPageForm> getNewsLinkPage(@Param(Constants.WRAPPER) QueryWrapper<SaltNewsLinkEntity> qw);
 
-
+    SaltNewsLinkImgForm getImg(@Param(Constants.WRAPPER) QueryWrapper<SaltNewsLinkEntity> qw,@Param("code")String code);
 }

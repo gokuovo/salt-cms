@@ -1,6 +1,9 @@
 package com.salt.cms.team.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.salt.cms.entity.SaltStaffEntity;
+import com.salt.cms.entity.SaltWordEntity;
+import com.salt.cms.ourservice.dao.SaltWordDao;
 import com.salt.cms.team.dao.SaltStaffDao;
 import com.salt.cms.team.form.SaltTeamForm;
 import com.salt.cms.team.service.SaltTeamService;
@@ -22,6 +25,9 @@ public class SaltTeamServiceImpl implements SaltTeamService {
 
     @Autowired
     private SaltStaffDao saltStaffDao;
+
+    @Autowired
+    private SaltWordDao saltWordDao;
 
     @Override
     public List<SaltTeamForm> getTeam() {
@@ -59,5 +65,13 @@ public class SaltTeamServiceImpl implements SaltTeamService {
     public DeletedVO deleteStaff(String id) {
         saltStaffDao.deleteById(id);
         return new DeletedVO("已删除");
+    }
+
+    @Override
+    public SaltWordEntity teamWord() {
+        QueryWrapper<SaltWordEntity> qw = new QueryWrapper<>();
+        qw.eq("use_where","2");
+        qw.eq("word_type","21");
+        return saltWordDao.selectOne(qw);
     }
 }

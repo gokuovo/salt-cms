@@ -44,6 +44,7 @@
         word_text_spa wordTextSpa,
         noti noti
         from salt_word w
+        where use_where = "0"
     </select>
 
     <select id="getArticle" resultType="com.salt.cms.entity.SaltWordEntity">

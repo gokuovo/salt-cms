@@ -264,7 +264,20 @@ public class SaltFileServiceImpl extends ServiceImpl<FileMapper, FileDO> impleme
                             saltImagesEntity.setImageUrl(path(file.getPath()));
                             saltImagesDao.updateById(saltImagesEntity);
                         }
-                    }else if (fileType.startsWith("musics")){
+                    }else if ("newslink".equals(fileType)){
+                        if (StringUtils.isEmpty(id)){
+                            SaltImagesEntity saltImagesEntity = new SaltImagesEntity();
+                            saltImagesEntity.setId(UUID.randomUUID().toString());
+                            saltImagesEntity.setImageCode(fileType);
+                            saltImagesEntity.setImageUrl(path(file.getPath()));
+                            saltImagesDao.insert(saltImagesEntity);
+                        }else{
+                            SaltImagesEntity saltImagesEntity = new SaltImagesEntity();
+                            saltImagesEntity.setId(id);
+                            saltImagesEntity.setImageUrl(path(file.getPath()));
+                            saltImagesDao.updateById(saltImagesEntity);
+                        }
+                    } else if (fileType.startsWith("musics")){
                         SaltMusicVideoEntity saltMusicVideoEntity = new SaltMusicVideoEntity();
                         saltMusicVideoEntity.setId(UUID.randomUUID().toString());
                         saltMusicVideoEntity.setTitle(originalName);

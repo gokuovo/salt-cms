@@ -19,9 +19,9 @@
         (SELECT image_url from salt_images where image_code = b.img01) img01,
         (SELECT image_url from salt_images where image_code = b.img02) img02,
         (SELECT image_url from salt_images where image_code = b.img03) img03,
-        b.img01 imgId01,
-        b.img02 imgId02,
-        b.img03 imgId03,
+        SUBSTRING(b.img01,2,2) imgId01,
+        SUBSTRING(b.img02,2,2) imgId02,
+        SUBSTRING(b.img03,2,2) imgId03,
         (SELECT image_url from salt_images where image_code = b.img01) img01,
         (SELECT image_url from salt_images where image_code = b.img02) img02,
         (SELECT image_url from salt_images where image_code = b.img03) img03,
@@ -33,6 +33,24 @@
         b.text_chi02 textChi02,
         b.text_jap02 textJap02,
         b.text_spa02 textSpa02
+        from salt_news_link b
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="getImg" resultType="com.salt.cms.news.form.SaltNewsLinkImgForm">
+        select
+        <if test="code=='01'">
+            (SELECT image_url FROM salt_images WHERE image_code = b.img01) url,
+            (SELECT id FROM salt_images WHERE image_code = b.img01) id
+        </if>
+        <if test='code=="02"'>
+            (SELECT image_url FROM salt_images WHERE image_code = b.img02) url,
+            (SELECT id FROM salt_images WHERE image_code = b.img02) id
+        </if>
+        <if test="code=='03'">
+            (SELECT image_url FROM salt_images WHERE image_code = b.img03) url,
+            (SELECT id FROM salt_images WHERE image_code = b.img03) id
+        </if>
         from salt_news_link b
         ${ew.customSqlSegment}
     </select>

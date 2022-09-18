@@ -6,6 +6,7 @@ import com.salt.cms.entity.SaltNewsLinkEntity;
 import com.salt.cms.news.dao.SaltNewsDao;
 import com.salt.cms.news.dao.SaltNewsLinkDao;
 import com.salt.cms.news.form.SaltNewsLinkForm;
+import com.salt.cms.news.form.SaltNewsLinkImgForm;
 import com.salt.cms.news.form.SaltNewsLinkPageForm;
 import com.salt.cms.news.service.SaltNewsLinkService;
 import com.salt.cms.vo.UpdatedVO;
@@ -52,5 +53,12 @@ public class SaltNewsLinkServiceImpl implements SaltNewsLinkService {
         saltNewsEntity.setDateEn(saltNewsLinkPageForm.getDate());
         saltNewsDao.updateById(saltNewsEntity);
         return new UpdatedVO("更新成功");
+    }
+
+    @Override
+    public SaltNewsLinkImgForm getImg(String id, String code) {
+        QueryWrapper<SaltNewsLinkEntity> qw = new QueryWrapper<>();
+        qw.eq("id",id);
+        return saltNewsDao.getImg(qw,code);
     }
 }

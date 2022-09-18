@@ -2,6 +2,7 @@ package com.salt.cms.news.controller;
 
 import com.salt.cms.news.form.SaltNewsForm;
 import com.salt.cms.news.form.SaltNewsLinkForm;
+import com.salt.cms.news.form.SaltNewsLinkImgForm;
 import com.salt.cms.news.form.SaltNewsLinkPageForm;
 import com.salt.cms.news.service.SaltNewsLinkService;
 import com.salt.cms.vo.UpdatedVO;
@@ -31,5 +32,10 @@ public class SaltNewsLinkController {
     @PostMapping("modifyNewsLink")
     public UpdatedVO modifyNewsLink(@RequestBody SaltNewsLinkPageForm saltNewsLinkPageForm){
         return saltNewsLinkService.modifyNewsLink(saltNewsLinkPageForm);
+    }
+
+    @GetMapping("getImg")
+    public SaltNewsLinkImgForm getImg(@RequestParam("id") String id,@RequestParam("code") String code){
+        return saltNewsLinkService.getImg(id,code);
     }
 }
