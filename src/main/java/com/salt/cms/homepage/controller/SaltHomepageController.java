@@ -35,6 +35,12 @@ public class SaltHomepageController {
         return saltHomepageService.getBackground();
     }
 
+    @GetMapping("/getBackgroundUnderMobile")
+    public List<SaltImagesEntity> getBackgroundMobile(){
+        log.info("开始获取手机背景");
+        return saltHomepageService.getBackgroundMobile();
+    }
+
     /**
      * 根据imageCode获取不同图片
      * @param imageCode

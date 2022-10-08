@@ -52,6 +52,23 @@ public class SaltHomepageServiceImpl extends ServiceImpl<SaltImagesDao,SaltImage
     }
 
     @Override
+    public List<SaltImagesEntity> getBackgroundMobile() {
+        QueryWrapper<SaltImagesEntity> qw = new QueryWrapper<>();
+        List<String> list = new ArrayList<>();
+        list.add("m1");
+        list.add("m2");
+        list.add("m3");
+        list.add("m4");
+        list.add("m5");
+        list.add("m6");
+        list.add("m7");
+        list.add("m8");
+        qw.in("image_code",list);
+        List<SaltImagesEntity> saltImagesEntities = saltImagesDao.getBackground(qw);
+        return saltImagesEntities;
+    }
+
+    @Override
     public List<SaltImagesEntity> getImagesByImageCode(String imageCode) {
         List<SaltImagesEntity> list = new ArrayList<>();
         if(null == imageCode || imageCode.equals("")){

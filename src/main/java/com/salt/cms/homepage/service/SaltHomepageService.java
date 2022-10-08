@@ -13,6 +13,9 @@ public interface SaltHomepageService {
 
     List<SaltImagesEntity> getBackground();
 
+
+    List<SaltImagesEntity> getBackgroundMobile();
+
     List<SaltImagesEntity> getImagesByImageCode(String imageCode);
 
     R addImage(SaltImagesForm saltImagesForm);
